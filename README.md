@@ -5,7 +5,7 @@ or abstract syntax tree (AST). If you are looking to achieve either a DOM or AST
 there are other libraries and native implementations to do so
 ([PHP : DOM](https://www.php.net/manual/en/simplexml.examples-basic.php) and [SimpleXML](https://www.php.net/manual/en/simplexml.examples-basic.php), for example).
 
-XML Builder would generate a string you could feed into either PHP:DOM or Simple XML.
+You might use XML Builder to generate a string you feed into either PHP:DOM or Simple XML.
 
 The `Element` class is used to create individual nodes within the document itself.
 
