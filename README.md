@@ -63,4 +63,3 @@ contents.
 - [Governance](https://github.com/8fold/php-xml-builder/blob/master/.github/GOVERNANCE.md)
 - [Versioning](https://github.com/8fold/php-xml-builder/blob/master/.github/VERSIONING.md)
 - [Security](https://github.com/8fold/php-xml-builder/blob/master/.github/SECURITY.md)
-{links or descriptions or license, versioning, and governance}
