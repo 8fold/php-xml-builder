@@ -28,7 +28,7 @@
   "prefer-stable": true,
   "scripts": {
     "prod": "@production",
-    "production": ["@style", "@stan", "@test-unit"],
+    "production": ["@style", "@stan", "@test"],
     "style": "./vendor/bin/phpcs --standard=PSR12 ./src",
     "stan": "./vendor/bin/phpstan analyze",
     "test": "./vendor/bin/pest"

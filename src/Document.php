@@ -82,7 +82,7 @@ class Document // implements Stringable
     /**
      * @return array<string>
      */
-    public function properties(): array
+    private function properties(): array
     {
         return $this->properties;
     }

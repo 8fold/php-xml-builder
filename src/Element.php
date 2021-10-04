@@ -98,7 +98,7 @@ class Element // implements Stringable
     /**
      * @return array<string> [description]
      */
-    public function properties(): array
+    private function properties(): array
     {
         return $this->properties;
     }
