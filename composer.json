@@ -10,10 +10,12 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.6",
     "phpstan/phpstan": "^0.12",
-    "pestphp/pest": "^1.20"
+    "pestphp/pest": "^1.20",
+    "psr/log": "^1.0.1"
   },
   "autoload": {
     "psr-4": {
+      "Eightfold\\XMLBuilder\\": "./src"
     }
   },
   "autoload-dev": {
@@ -24,5 +26,11 @@
     "preferred-install": "dist"
   },
   "prefer-stable": true,
-  "scripts": {}
+  "scripts": {
+    "prod": "@production",
+    "production": ["@style", "@stan", "@test"],
+    "style": "./vendor/bin/phpcs --standard=PSR12 ./src",
+    "stan": "./vendor/bin/phpstan analyze",
+    "test": "./vendor/bin/pest"
+  }
 }
