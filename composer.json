@@ -14,6 +14,7 @@
   },
   "autoload": {
     "psr-4": {
+      "Eightfold\\XMLBuilder\\": "./src"
     }
   },
   "autoload-dev": {
@@ -24,5 +25,11 @@
     "preferred-install": "dist"
   },
   "prefer-stable": true,
-  "scripts": {}
+  "scripts": {
+    "prod": "@production",
+    "production": ["@style", "@stan", "@test-unit"],
+    "style": "./vendor/bin/phpcs --standard=PSR12 ./src",
+    "stan": "./vendor/bin/phpstan analyze",
+    "test": "./vendor/bin/pest"
+  }
 }
