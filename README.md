@@ -78,9 +78,7 @@ The secondary pain point was to keep the feel of writing human-friendly XML
 (tabs and spaces) while reducing the potential for human error; specifically,
 mismatched beginning and ending tags.
 
-Finally, working with PHP:DOM and SimpleXML felt quite painful when generating
-or maniulating HTML and XML documents rather than parsing a string or file
-contents.
+Finally, working with PHP:DOM and SimpleXML felt quite painful when generating HTML and XML documents.
 
 ## Other
 
