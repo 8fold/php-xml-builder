@@ -15,7 +15,7 @@ The `Document` class is use to generate the doctype declaration and root level e
 
 ## Installation
 
-{how does one install the product}
+`composer require 8fold/php-xml-builder`
 
 ## Usage
 
