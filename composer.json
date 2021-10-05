@@ -34,7 +34,7 @@
   "scripts": {
     "prod": "@production",
     "production": ["@style", "@stan", "@test"],
-    "style": "./vendor/bin/phpcs --standard=PSR12 ./src",
+    "style": "./vendor/bin/phpcs --standard=phpcs.xml -p ./src",
     "stan": "./vendor/bin/phpstan analyze",
     "test": "./vendor/bin/pest"
   }

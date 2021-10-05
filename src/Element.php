@@ -70,7 +70,8 @@ class Element // implements Stringable
     private function opening(): string
     {
         if ($this->shouldOmitEndTag()) {
-            return '<' . $this->elementName() . $this->propertiesString() . ' />';
+            return '<' . $this->elementName() . $this->propertiesString()
+                . ' />';
         }
         return '<' . $this->elementName() . $this->propertiesString() . '>';
     }

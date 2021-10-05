@@ -50,8 +50,11 @@ class Document // implements Stringable
 
     public function build(): string
     {
-        $doctype = '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>' . "\n";
-        return $doctype . $this->opening() . $this->contentString() . $this->closing();
+        $doctype =
+            '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'
+            . "\n";
+        return $doctype . $this->opening() . $this->contentString()
+            . $this->closing();
     }
 
     public function __toString(): string
@@ -68,12 +71,14 @@ class Document // implements Stringable
     {
         if (count($this->properties()) === 0) {
             return '';
+
         }
 
         $b = [];
         foreach ($this->properties() as $property) {
             $property = explode(' ', $property, 2);
             $b[] = $property[0] . '="' . $property[1] . '"';
+
         }
 
         return ' ' . implode(' ', $b);
@@ -112,6 +117,7 @@ class Document // implements Stringable
             $b .= (is_a($inner, Element::class))
                 ? $inner->build()
                 : $inner;
+
         }
         return $b;
     }
