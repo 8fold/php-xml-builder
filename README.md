@@ -60,7 +60,7 @@ Document::root(
   )
 )->build()
 
-// outputs: Same as previous example.
+// output: Same as previous example.
 ```
 
 ## Details
