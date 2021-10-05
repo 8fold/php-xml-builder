@@ -30,6 +30,15 @@ class Document // implements Stringable
     }
 
     /**
+     * @param  string $rootName
+     * @param  array<Element|string>  $content
+     */
+    public static function __callStatic(string $rootName, $content = []): Document
+    {
+        return static::create($rootName, ...$content);
+    }
+
+    /**
      * @param string $rootName <{$rootName}>
      *                         PHP8: auto-assign local variable
      * @param Element|string $content Content within tags.

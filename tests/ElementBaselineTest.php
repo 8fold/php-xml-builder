@@ -28,6 +28,20 @@ test('Element can have properties', function() {
     );
 });
 
+test('Element can use shorthand', function() {
+    expect(
+        Element::root(
+            Element::child(
+                Element::grandchild('Xavier')->omitEndTag()
+                    ->props('name Xavier'),
+                '<!CDATA[String]]>'
+            )
+        )->build()
+    )->toBe(
+        '<root><child><grandchild name="Xavier" />Xavier<!CDATA[String]]></child></root>'
+    );
+});
+
 test('Element can accept content', function() {
     expect(
         Element::create('root',
@@ -37,7 +51,7 @@ test('Element can accept content', function() {
             )
         )->build()
     )->toBe(
-        "<root><child><grandchild></grandchild><!CDATA[String]]></child></root>"
+        '<root><child><grandchild></grandchild><!CDATA[String]]></child></root>'
     );
 });
 

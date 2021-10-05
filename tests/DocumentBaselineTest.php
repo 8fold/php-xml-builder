@@ -19,6 +19,19 @@ test('Document can have properties', function() {
     );
 });
 
+test('Document can use shorthand', function() {
+    expect(
+        Document::root(
+            Element::child(
+                Element::grandchild(),
+                '<!CDATA[String]]>'
+            )
+        )->build()
+    )->toBe(
+        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><!CDATA[String]]></child></root>'
+    );
+});
+
 test('Document can accept content', function() {
     expect(
         Document::create('root',

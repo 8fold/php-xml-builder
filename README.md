@@ -25,7 +25,7 @@ use Eightfold\XMLBuilder\Element;
 
 Document::create('root',
   Element::create('child',
-    Element::create('grandchild', 'Xavier')->omitEndTag()->props("name Xavier"),
+    Element::create('grandchild', 'Xavier')->omitEndTag()->props('name Xavier'),
     '<!CDATA[Hello, my name is Xavier!]]>'
   )
 )->build()

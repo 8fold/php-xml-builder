@@ -24,6 +24,15 @@ class Element // implements Stringable
     private array $properties = [];
 
     /**
+     * @param  string $elementName
+     * @param  array<Element|string>  $content
+     */
+    public static function __callStatic(string $elementName, $content = []): Element
+    {
+        return static::create($elementName, ...$content);
+    }
+
+    /**
      * @param  Element|string $content
      */
     public static function create(string $elementName, ...$content): Element
