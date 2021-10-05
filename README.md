@@ -28,7 +28,7 @@ Document::create('root',
     Element::create('grandchild')->omitEndTag()->props('name Xavier'),
     '<!CDATA[Hello, my name is Xavier!]]>'
   )
-)->build()
+)->build();
 ```
 
 Output:
@@ -63,7 +63,23 @@ Document::root(
     Element::grandchild()->omitEndTag()->props('name Xavier'),
     '<!CDATA[Hello, my name is Xavier!]]>'
   )
-)->build()
+)->build();
+
+// output: Same as previous example.
+```
+
+Both the `Document` and `Element` classes are convertable to a `string` using the `__toString()` magic method.
+
+```php
+use Eightfold\XMLBuilder\Document;
+use Eightfold\XMLBuilder\Element;
+
+echo Document::root(
+  Element::child(
+    Element::grandchild()->omitEndTag()->props('name Xavier'),
+    '<!CDATA[Hello, my name is Xavier!]]>'
+  )
+);
 
 // output: Same as previous example.
 ```
