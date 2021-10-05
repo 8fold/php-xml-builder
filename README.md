@@ -30,7 +30,7 @@ Document::create('root',
   )
 )->build()
 
-// outputs:
+// output:
 // <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 // <root><child><grandchild name="Xavier"/><!CDATA[Hello, my name is Xavier!]]></child></root>
 //
@@ -42,6 +42,25 @@ Document::create('root',
 //     <!CDATA[Hello, my name is Xavier!]]>
 //   </child>
 // </root>
+```
+
+Alternatively, there is a shorthand variation that can also be used.
+
+The shorthand method uses the `__callStatic` PHP magic method to use the method
+name called as the document and element name, respectively.
+
+```php
+use Eightfold\XMLBuilder\Document;
+use Eightfold\XMLBuilder\Element;
+
+Document::root(
+  Element::child(
+    Element::grandchild('Xavier')->omitEndTag()->props('name Xavier'),
+    '<!CDATA[Hello, my name is Xavier!]]>'
+  )
+)->build()
+
+// outputs: Same as previous example.
 ```
 
 ## Details
