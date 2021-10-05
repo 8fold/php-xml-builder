@@ -9,9 +9,9 @@ there are other libraries and native implementations to do so
 You might use XML Builder to generate a string you feed into either PHP:DOM or
 Simple XML. Or, use the string as the body of an HTTP response.
 
-The `Element` class is used to create individual nodes within the document itself.
+Use the `Element` class to create individual nodes within the document itself.
 
-The `Document` class is use to generate the doctype declaration and root level element.
+Use the `Document` class to generate the doctype declaration and root level element.
 
 ## Installation
 
