@@ -72,6 +72,7 @@ class Element // implements Stringable
         if ($this->shouldOmitEndTag()) {
             return '<' . $this->elementName() . $this->propertiesString()
                 . ' />';
+
         }
         return '<' . $this->elementName() . $this->propertiesString() . '>';
     }
@@ -85,12 +86,14 @@ class Element // implements Stringable
     {
         if (count($this->properties()) === 0) {
             return '';
+
         }
 
         $b = [];
         foreach ($this->properties() as $property) {
             $property = explode(' ', $property, 2);
             $b[] = $property[0] . '="' . $property[1] . '"';
+
         }
 
         return ' ' . implode(' ', $b);
@@ -108,6 +111,7 @@ class Element // implements Stringable
     {
         if ($this->shouldOmitEndTag()) {
             return '';
+
         }
         return '</' . $this->elementName() . '>';
     }
@@ -132,6 +136,7 @@ class Element // implements Stringable
             $b .= (is_a($inner, Element::class))
                 ? $inner->build()
                 : $inner;
+
         }
         return $b;
     }
