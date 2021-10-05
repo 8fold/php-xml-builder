@@ -29,19 +29,24 @@ Document::create('root',
     '<!CDATA[Hello, my name is Xavier!]]>'
   )
 )->build()
+```
 
-// output:
-// <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-// <root><child><grandchild name="Xavier"/><!CDATA[Hello, my name is Xavier!]]></child></root>
-//
-// output (formatted):
-// <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-// <root>
-//   <child>
-//     <grandchild name="Xavier"/>
-//     <!CDATA[Hello, my name is Xavier!]]>
-//   </child>
-// </root>
+Output:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<root><child><grandchild name="Xavier"/><!CDATA[Hello, my name is Xavier!]]></child></root>
+```
+Output (formatted):
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<root>
+  <child>
+    <grandchild name="Xavier"/>
+    <!CDATA[Hello, my name is Xavier!]]>
+  </child>
+</root>
 ```
 
 Alternatively, there is a shorthand variation that can also be used.
