@@ -3,7 +3,7 @@
 XML Builder is designed to build a `string`, not a document object model (DOM)
 or abstract syntax tree (AST). If you are looking to achieve either a DOM or AST,
 there are other libraries and native implementations to do so
-([PHP : DOM](https://www.php.net/manual/en/simplexml.examples-basic.php) and
+([PHP:DOM](https://www.php.net/manual/en/simplexml.examples-basic.php) and
 [SimpleXML](https://www.php.net/manual/en/simplexml.examples-basic.php), for example).
 
 You might use XML Builder to generate a string you feed into either PHP:DOM or
@@ -68,7 +68,7 @@ Document::root(
 // output: Same as previous example.
 ```
 
-Both the `Document` and `Element` classes are convertable to a `string` using the `__toString()` magic method.
+Both the `Document` and `Element` classes can be converted directly to a `string` using the `__toString()` magic method.
 
 ```php
 use Eightfold\XMLBuilder\Document;
@@ -94,7 +94,7 @@ The secondary pain point was to keep the feel of writing human-friendly XML
 (tabs and spaces) while reducing the potential for human error; specifically,
 mismatched beginning and ending tags.
 
-Finally, working with PHP:DOM and SimpleXML felt quite painful when generating HTML and XML documents.
+Finally, working with PHP:DOM and SimpleXML felt cumbersome when generating HTML and XML documents.
 
 ## Other
 
