@@ -46,7 +46,7 @@ class Element // implements Stringable
      * @param Element|string $content Content within tags.
      *                                PHP8: union type to Element|string
      */
-    public function __construct(string $elementName, ...$content)
+    final public function __construct(string $elementName, ...$content)
     {
         $this->elementName = $elementName;
         $this->content     = $content;

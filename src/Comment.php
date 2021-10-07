@@ -13,10 +13,10 @@ class Comment // implements Stringable
 
     public static function create(string $content): Comment
     {
-        return new Comment($content);
+        return new static($content);
     }
 
-    public function __construct(string $content)
+    final public function __construct(string $content)
     {
         $this->content     = $content;
     }

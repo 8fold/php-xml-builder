@@ -26,7 +26,7 @@ class Document // implements Stringable
      */
     public static function create(string $rootName, ...$content): Document
     {
-        return new Document($rootName, ...$content);
+        return new static($rootName, ...$content);
     }
 
     /**
@@ -44,7 +44,7 @@ class Document // implements Stringable
      * @param Element|string $content Content within tags.
      *                                PHP8: union type to Element|string
      */
-    public function __construct(string $rootName, ...$content)
+    final public function __construct(string $rootName, ...$content)
     {
         $this->rootName = $rootName;
         $this->content     = $content;

@@ -13,10 +13,10 @@ class Cdata // implements Stringable
 
     public static function create(string $content): Cdata
     {
-        return new Cdata($content);
+        return new static($content);
     }
 
-    public function __construct(string $content)
+    final public function __construct(string $content)
     {
         $this->content = $content;
     }
