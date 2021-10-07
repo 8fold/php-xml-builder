@@ -87,6 +87,29 @@ echo Document::root(
 // output: Same as previous example.
 ```
 
+Comments are also available:
+
+```php
+use Eightfold\XMLBuilder\Document;
+use Eightfold\XMLBuilder\Element;
+use Eightfold\XMLBuilder\Cdata;
+
+echo Document::create(
+  'root',
+  Comment::create('comment'),
+  Element::create('tag')->omitEndTag()
+)->build()
+```
+
+Output (unformatted):
+
+```xml
+<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+<root>
+<!-- comment -->
+<tag /></root>
+```
+
 ## Details
 
 This library primarily came about from an experiment in which PHP was viewed
