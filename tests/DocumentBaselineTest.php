@@ -3,12 +3,29 @@
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
 use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XMLBuilder\Comment;
 
 test('Document is Stringable', function() {
     expect(
         (string) Document::create('root')->props('id 6', 'property hello')
     )->toBe(
         '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root id="6" property="hello"></root>'
+    );
+});
+
+test('Document can have comment', function() {
+    expect(
+        Document::create(
+            'root',
+            Comment::create('comment'),
+            Element::create('tag')->omitEndTag()
+        )->build()
+    )->toBe(
+        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>' .
+        "\n" .
+        '<root>' . "\n" .
+        '<!-- comment -->' . "\n" .
+        '<tag /></root>'
     );
 });
 
