@@ -50,7 +50,7 @@ test('Document is speedy', function() {
     $elapsed = $end - $start;
     $ms      = $elapsed/1e+6;
 
-    expect($ms)->toBeLessThan(0.05);
+    expect($ms)->toBeLessThan(0.2);
 });
 
 test('Document is small', function() {
