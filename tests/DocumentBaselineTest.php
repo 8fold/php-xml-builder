@@ -2,6 +2,7 @@
 
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
+use Eightfold\XMLBuilder\Cdata;
 
 test('Document is Stringable', function() {
     expect(
@@ -24,11 +25,11 @@ test('Document can use shorthand', function() {
         Document::root(
             Element::child(
                 Element::grandchild(),
-                '<!CDATA[String]]>'
+                Cdata::create('String')
             )
         )->build()
     )->toBe(
-        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><!CDATA[String]]></child></root>'
+        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>'
     );
 });
 
@@ -37,11 +38,11 @@ test('Document can accept content', function() {
         Document::create('root',
             Element::create('child',
                 Element::create('grandchild'),
-                '<!CDATA[String]]>'
+                Cdata::create('String')
             )
         )->build()
     )->toBe(
-        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><!CDATA[String]]></child></root>'
+        '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>'
     );
 });
 

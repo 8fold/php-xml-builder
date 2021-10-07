@@ -22,11 +22,12 @@ Use the `Document` class to generate the doctype declaration and root level elem
 ```php
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
+use Eightfold\XMLBuilder\Cdata;
 
 Document::create('root',
   Element::create('child',
     Element::create('grandchild')->omitEndTag()->props('name Xavier'),
-    '<!CDATA[Hello, my name is Xavier!]]>'
+    Cdata::create('Hello, my name is Xavier!')
   )
 )->build();
 ```
@@ -35,7 +36,7 @@ Output:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<root><child><grandchild name="Xavier"/><!CDATA[Hello, my name is Xavier!]]></child></root>
+<root><child><grandchild name="Xavier"/><![CDATA[Hello, my name is Xavier!]]></child></root>
 ```
 Output (formatted):
 
@@ -44,7 +45,7 @@ Output (formatted):
 <root>
   <child>
     <grandchild name="Xavier"/>
-    <!CDATA[Hello, my name is Xavier!]]>
+    <![CDATA[Hello, my name is Xavier!]]>
   </child>
 </root>
 ```
@@ -57,11 +58,12 @@ name called as the document and element name, respectively.
 ```php
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
+use Eightfold\XMLBuilder\Cdata;
 
 Document::root(
   Element::child(
     Element::grandchild()->omitEndTag()->props('name Xavier'),
-    '<!CDATA[Hello, my name is Xavier!]]>'
+    Cdata::create('Hello, my name is Xavier!')
   )
 )->build();
 
@@ -73,11 +75,12 @@ Both the `Document` and `Element` classes can be converted directly to a `string
 ```php
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
+use Eightfold\XMLBuilder\Cdata;
 
 echo Document::root(
   Element::child(
     Element::grandchild()->omitEndTag()->props('name Xavier'),
-    '<!CDATA[Hello, my name is Xavier!]]>'
+    Cdata::create('Hello, my name is Xavier!')
   )
 );
 
