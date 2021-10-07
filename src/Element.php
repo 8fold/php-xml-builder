@@ -37,7 +37,7 @@ class Element // implements Stringable
      */
     public static function create(string $elementName, ...$content): Element
     {
-        return new Element($elementName, ...$content);
+        return new static($elementName, ...$content);
     }
 
     /**
