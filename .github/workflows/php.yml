@@ -1,7 +1,7 @@
 name: php-74
 on: [push, pull_request]
 jobs:
-	PHP 7.4:
+	php-74:
 		runs-on: ubuntu-latest
 		steps:
 			- name: Checkout

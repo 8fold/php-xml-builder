@@ -1,7 +1,7 @@
 name: php-80
 on: [push, pull_request]
 jobs:
-	PHP 8.0:
+	php-80:
 		runs-on: ubuntu-latest
 		steps:
 			- name: Checkout
