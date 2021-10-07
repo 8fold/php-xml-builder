@@ -44,6 +44,7 @@ test('Document can accept content', function() {
     )->toBe(
         '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>'
     );
+
 });
 
 test('Document can be static initialized', function() {

@@ -22,4 +22,5 @@ test('CDATA exists', function() {
     $this->assertTrue(
         class_exists(Cdata::class)
     );
+
 });

@@ -31,6 +31,7 @@ class Cdata // implements Stringable
         return $this->build();
     }
 
+
     private function content(): string
     {
         return $this->content;
