@@ -66,6 +66,11 @@ class Element // implements Stringable
         return $this;
     }
 
+    protected function omitEndTagClosingString(): string
+    {
+        return ' />';
+    }
+
     public function build(): string
     {
         return $this->opening() . $this->contentString() . $this->closing();
@@ -79,8 +84,10 @@ class Element // implements Stringable
     private function opening(): string
     {
         if ($this->shouldOmitEndTag()) {
-            return '<' . $this->elementName() . $this->propertiesString()
-                . ' />';
+            return '<' .
+                $this->elementName() .
+                $this->propertiesString() .
+                $this->omitEndTagClosingString();
 
         }
         return '<' . $this->elementName() . $this->propertiesString() . '>';
