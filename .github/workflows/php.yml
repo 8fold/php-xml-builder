@@ -1,12 +1,5 @@
-name: PHP 7.4
-on:
-	push:
-		branches:
-			- main
-	pull_request:
-		branches:
-			- main
-
+name: php-74
+on: [push, pull_request]
 jobs:
 	build:
 
