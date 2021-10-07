@@ -106,5 +106,3 @@ Finally, working with PHP:DOM and SimpleXML felt cumbersome when generating HTML
 - [Governance](https://github.com/8fold/php-xml-builder/blob/master/.github/GOVERNANCE.md)
 - [Versioning](https://github.com/8fold/php-xml-builder/blob/master/.github/VERSIONING.md)
 - [Security](https://github.com/8fold/php-xml-builder/blob/master/.github/SECURITY.md)
-
-
