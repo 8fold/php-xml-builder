@@ -88,6 +88,14 @@ class Element // implements Stringable
         return ' ' . implode(' ', $b);
     }
 
+    /**
+     * @return array<string> [description]
+     */
+    protected function properties(): array
+    {
+        return $this->properties;
+    }
+
     public function build(): string
     {
         return $this->opening() . $this->contentString() . $this->closing();
@@ -113,14 +121,6 @@ class Element // implements Stringable
     private function shouldOmitEndTag(): bool
     {
         return $this->omitEndTag;
-    }
-
-    /**
-     * @return array<string> [description]
-     */
-    private function properties(): array
-    {
-        return $this->properties;
     }
 
     private function closing(): string
