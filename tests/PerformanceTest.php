@@ -32,19 +32,19 @@ test('Document is speedy', function() {
     $end = hrtime(true);
 
     expect($result)->toBe(<<<doc
-  <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
-  <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
-  <!-- 3 -->
-  <item>Hello, 3!</item>
-  <!-- 4 -->
-  <item><![CDATA[CDATA 4]]></item>
-  <!-- 5 -->
-  <item>Hello, 5!</item>
-  <!-- 6 -->
-  <item>Hello, 6!</item>
-  <!-- 7 -->
-  <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
-  doc
+        <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+        <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
+        <!-- 3 -->
+        <item>Hello, 3!</item>
+        <!-- 4 -->
+        <item><![CDATA[CDATA 4]]></item>
+        <!-- 5 -->
+        <item>Hello, 5!</item>
+        <!-- 6 -->
+        <item>Hello, 6!</item>
+        <!-- 7 -->
+        <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
+        doc
     );
 
     $elapsed = $end - $start;
@@ -80,19 +80,19 @@ test('Document is small', function() {
     $end = memory_get_usage();
 
     expect($result)->toBe(<<<doc
-  <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
-  <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
-  <!-- 3 -->
-  <item>Hello, 3!</item>
-  <!-- 4 -->
-  <item><![CDATA[CDATA 4]]></item>
-  <!-- 5 -->
-  <item>Hello, 5!</item>
-  <!-- 6 -->
-  <item>Hello, 6!</item>
-  <!-- 7 -->
-  <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
-  doc
+        <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+        <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
+        <!-- 3 -->
+        <item>Hello, 3!</item>
+        <!-- 4 -->
+        <item><![CDATA[CDATA 4]]></item>
+        <!-- 5 -->
+        <item>Hello, 5!</item>
+        <!-- 6 -->
+        <item>Hello, 6!</item>
+        <!-- 7 -->
+        <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
+        doc
     );
 
     $used = $end - $start;

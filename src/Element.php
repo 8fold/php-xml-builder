@@ -71,6 +71,23 @@ class Element // implements Stringable
         return ' />';
     }
 
+    protected function propertiesString(): string
+    {
+        if (count($this->properties()) === 0) {
+            return '';
+
+        }
+
+        $b = [];
+        foreach ($this->properties() as $property) {
+            $property = explode(' ', $property, 2);
+            $b[] = $property[0] . '="' . $property[1] . '"';
+
+        }
+
+        return ' ' . implode(' ', $b);
+    }
+
     public function build(): string
     {
         return $this->opening() . $this->contentString() . $this->closing();
@@ -96,23 +113,6 @@ class Element // implements Stringable
     private function shouldOmitEndTag(): bool
     {
         return $this->omitEndTag;
-    }
-
-    private function propertiesString(): string
-    {
-        if (count($this->properties()) === 0) {
-            return '';
-
-        }
-
-        $b = [];
-        foreach ($this->properties() as $property) {
-            $property = explode(' ', $property, 2);
-            $b[] = $property[0] . '="' . $property[1] . '"';
-
-        }
-
-        return ' ' . implode(' ', $b);
     }
 
     /**
