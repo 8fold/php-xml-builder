@@ -19,6 +19,8 @@ Use the `Document` class to generate the doctype declaration and root level elem
 
 ## Usage
 
+Warning: Users of this library are responsible for sanitizing content.
+
 ```php
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
