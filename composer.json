@@ -1,6 +1,6 @@
 {
   "name": "8fold/php-xml-builder",
-  "description": "A library for building XML strings.",
+  "description": "A library for building XML document and element strings.",
   "type": "library",
   "license": "MIT",
   "authors": [

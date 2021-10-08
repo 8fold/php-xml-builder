@@ -1,4 +1,4 @@
-# 8fold XML Builder
+# 8fold XML Builder for PHP
 
 XML Builder is designed to build a `string`, not a document object model (DOM)
 or abstract syntax tree (AST). If you are looking to achieve either a DOM or AST,
@@ -120,7 +120,8 @@ The secondary pain point was to keep the feel of writing human-friendly XML
 (tabs and spaces) while reducing the potential for human error; specifically,
 mismatched beginning and ending tags.
 
-Finally, working with PHP:DOM and SimpleXML felt cumbersome when generating HTML and XML documents.
+Finally, working with PHP:DOM and SimpleXML felt cumbersome when generating HTML
+and XML documents.
 
 ## Other
 
