@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
+use Eightfold\XMLBuilder\Contracts\Buildable;
+
 // use \Stringable;
 
 // TODO: PHP8 - specify implementing Stringable
-class Cdata // implements Stringable
+class Cdata implements Buildable // implements Stringable
 {
     private string $content = '';
 

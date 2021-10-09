@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
+use Eightfold\XMLBuilder\Contracts\Buildable;
+
 // use \Stringable;
 
 // TODO: PHP8 - specify implementing Stringable
-class Element // implements Stringable
+class Element implements Buildable // implements Stringable
 {
     private string $elementName;
 
@@ -24,16 +26,18 @@ class Element // implements Stringable
     private array $properties = [];
 
     /**
-     * @param  string $elementName
-     * @param  array<Element|string>  $content
+     * @param string $elementName
+     * @param array<Element|string> $content
      */
-    public static function __callStatic(string $elementName, $content = []): Element
-    {
+    public static function __callStatic(
+        string $elementName,
+        $content = []
+    ): Element {
         return static::create($elementName, ...$content);
     }
 
     /**
-     * @param  Element|string $content
+     * @param Element|string $content
      */
     public static function create(string $elementName, ...$content): Element
     {
