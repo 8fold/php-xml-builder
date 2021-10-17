@@ -33,4 +33,12 @@ trait Properties
 
         return ' ' . implode(' ', $b);
     }
+
+    /**
+     * @return array<string> [description]
+     */
+    protected function properties(): array
+    {
+        return $this->properties;
+    }
 }

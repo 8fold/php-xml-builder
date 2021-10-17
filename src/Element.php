@@ -66,14 +66,6 @@ class Element implements Buildable // implements Stringable
         return ' />';
     }
 
-    /**
-     * @return array<string> [description]
-     */
-    protected function properties(): array
-    {
-        return $this->properties;
-    }
-
     public function build(): string
     {
         return $this->opening() . $this->contentString() . $this->closing();
