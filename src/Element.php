@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Eightfold\XMLBuilder;
 
 use Eightfold\XMLBuilder\Contracts\Buildable;
+use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
 
 // use \Stringable;
 
 // TODO: PHP8 - specify implementing Stringable
 class Element implements Buildable // implements Stringable
 {
+    use PropertiesImp;
+
     private string $elementName;
 
     private bool $omitEndTag = false;
@@ -19,11 +22,6 @@ class Element implements Buildable // implements Stringable
      * @var array<Element|string>
      */
     private array $content = [];
-
-    /**
-     * @var array<string>
-     */
-    private array $properties = [];
 
     /**
      * @param string $elementName
@@ -56,13 +54,6 @@ class Element implements Buildable // implements Stringable
         $this->content     = $content;
     }
 
-    public function props(string ...$properties): Element
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
     public function omitEndTag(): Element
     {
         $this->omitEndTag = true;
@@ -73,23 +64,6 @@ class Element implements Buildable // implements Stringable
     protected function omitEndTagClosingString(): string
     {
         return ' />';
-    }
-
-    protected function propertiesString(): string
-    {
-        if (count($this->properties()) === 0) {
-            return '';
-
-        }
-
-        $b = [];
-        foreach ($this->properties() as $property) {
-            $property = explode(' ', $property, 2);
-            $b[] = $property[0] . '="' . $property[1] . '"';
-
-        }
-
-        return ' ' . implode(' ', $b);
     }
 
     /**
