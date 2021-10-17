@@ -11,6 +11,9 @@ trait Properties
      */
     private array $properties = [];
 
+    /**
+     * @return static $properties [description]
+     */
     public function props(string ...$properties)
     {
         $this->properties = $properties;
