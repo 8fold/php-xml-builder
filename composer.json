@@ -24,6 +24,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "Eightfold\\XMLBuilder\\Tests\\": "./tests"
     }
   },
   "config": {
@@ -35,6 +36,6 @@
     "production": ["@style", "@stan", "@test"],
     "style": "./vendor/bin/phpcs --standard=phpcs.xml -p ./src",
     "stan": "./vendor/bin/phpstan analyze",
-    "test": "./vendor/bin/pest"
+    "test": "./vendor/bin/phpunit"
   }
 }
