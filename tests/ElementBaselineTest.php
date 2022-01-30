@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 use Eightfold\XMLBuilder\Element;
 
-class ElementBaselingTests extends TestCase
+class ElementBaselineTest extends TestCase
 {
     /**
      *@test
@@ -81,7 +81,7 @@ class ElementBaselingTests extends TestCase
     /**
      *@test
      */
-    public function element_can_initialized_statically(): void
+    public function element_can_be_initialized_statically(): void
     {
         $this->assertEquals(
             Element::create('tag')->build(),
