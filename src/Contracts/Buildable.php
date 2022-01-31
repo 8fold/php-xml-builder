@@ -2,9 +2,9 @@
 
 namespace Eightfold\XMLBuilder\Contracts;
 
-interface Buildable
+use Stringable;
+
+interface Buildable extends Stringable
 {
     public function build(): string;
-
-    public function __toString(): string;
 }

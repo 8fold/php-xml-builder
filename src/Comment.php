@@ -6,35 +6,23 @@ namespace Eightfold\XMLBuilder;
 
 use Eightfold\XMLBuilder\Contracts\Buildable;
 
-// use \Stringable;
+use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
 
-// TODO: PHP8 - specify implementing Stringable
-class Comment implements Buildable // implements Stringable
+class Comment implements Buildable
 {
-    private string $content = '';
+    use BuildableImp;
 
     public static function create(string $content): Comment
     {
         return new static($content);
     }
 
-    final public function __construct(string $content)
+    final public function __construct(private string $content)
     {
-        $this->content     = $content;
-    }
-
-    private function content(): string
-    {
-        return $this->content;
-    }
-
-    public function build(): string
-    {
-        return "\n" . '<!-- ' . $this->content() . ' -->' . "\n";
     }
 
     public function __toString(): string
     {
-        return $this->build();
+        return "\n" . '<!-- ' . $this->content . ' -->' . "\n";
     }
 }
