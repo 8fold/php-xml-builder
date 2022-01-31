@@ -1,102 +1,119 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Eightfold\XMLBuilder\Tests;
+
+use PHPUnit\Framework\TestCase;
+
 use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Comment;
 use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XMLBuilder\Comment;
 
-test('Document is speedy', function() {
-    $start = hrtime(true);
+class PerformanceTest extends TestCase
+{
+    /**
+     *@test
+     */
+    public function document_is_speedy(): void
+    {
+        $start = hrtime(true);
 
-    $items = [];
-    for ($i = 0; $i < 10; $i++) {
-        if ($i > 2 and $i < 8) {
-            $items[] = Comment::create($i);
+        $items = [];
+        for ($i = 0; $i < 10; $i++) {
+            $j = strval($i);
+            if ($i > 2 and $i < 8) {
+                $items[] = Comment::create($j);
+            }
 
+            if ($i === 4) {
+                $items[] = Element::item(
+                    Cdata::create('CDATA ' . $j)
+                );
+
+            } else {
+                $items[] = Element::item("Hello, {$j}!");
+
+            }
         }
 
-        if ($i === 4) {
-            $items[] = Element::item(
-                Cdata::create('CDATA ' . $i)
-            );
+        $result = (string) Document::root(...$items);
 
-        } else {
-            $items[] = Element::item("Hello, {$i}!");
+        $end = hrtime(true);
 
-        }
+        $expected = <<<doc
+            <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+            <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
+            <!-- 3 -->
+            <item>Hello, 3!</item>
+            <!-- 4 -->
+            <item><![CDATA[CDATA 4]]></item>
+            <!-- 5 -->
+            <item>Hello, 5!</item>
+            <!-- 6 -->
+            <item>Hello, 6!</item>
+            <!-- 7 -->
+            <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
+            doc;
 
+        $this->assertEquals($expected, $result);
+
+        $elapsed = $end - $start;
+        $ms      = $elapsed/1e+6;
+
+        $this->assertLessThan(0.1, $ms);
     }
 
-    $result = (string) Document::root(...$items);
+    /**
+     *@test
+     */
+    public function document_is_small(): void
+    {
+        $start = memory_get_usage();
 
-    $end = hrtime(true);
+        $items = [];
+        for ($i = 0; $i < 10; $i++) {
+            $j = strval($i);
+            if ($i > 2 and $i < 8) {
+                $items[] = Comment::create($j);
+            }
 
-    expect($result)->toBe(<<<doc
-        <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
-        <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
-        <!-- 3 -->
-        <item>Hello, 3!</item>
-        <!-- 4 -->
-        <item><![CDATA[CDATA 4]]></item>
-        <!-- 5 -->
-        <item>Hello, 5!</item>
-        <!-- 6 -->
-        <item>Hello, 6!</item>
-        <!-- 7 -->
-        <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
-        doc
-    );
+            if ($i === 4) {
+                $items[] = Element::item(
+                    Cdata::create('CDATA ' . $j)
+                );
 
-    $elapsed = $end - $start;
-    $ms      = $elapsed/1e+6;
+            } else {
+                $items[] = Element::item("Hello, {$j}!");
 
-    expect($ms)->toBeLessThan(0.2);
-});
-
-test('Document is small', function() {
-    $start = memory_get_usage();;
-
-    $items = [];
-    for ($i = 0; $i < 10; $i++) {
-        if ($i > 2 and $i < 8) {
-            $items[] = Comment::create($i);
-
+            }
         }
 
-        if ($i === 4) {
-            $items[] = Element::item(
-                Cdata::create('CDATA ' . $i)
-            );
+        $result = (string) Document::root(...$items);
 
-        } else {
-            $items[] = Element::item("Hello, {$i}!");
+        $end = memory_get_usage();
 
-        }
+        $expected = <<<doc
+            <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+            <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
+            <!-- 3 -->
+            <item>Hello, 3!</item>
+            <!-- 4 -->
+            <item><![CDATA[CDATA 4]]></item>
+            <!-- 5 -->
+            <item>Hello, 5!</item>
+            <!-- 6 -->
+            <item>Hello, 6!</item>
+            <!-- 7 -->
+            <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
+            doc;
 
+        $this->assertEquals($expected, $result);
+
+        $used = $end - $start;
+        $kb   = round($used/1024.2);
+
+        $this->assertLessThan(8, $kb);
     }
-
-    $result = (string) Document::root(...$items);
-
-    $end = memory_get_usage();
-
-    expect($result)->toBe(<<<doc
-        <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
-        <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
-        <!-- 3 -->
-        <item>Hello, 3!</item>
-        <!-- 4 -->
-        <item><![CDATA[CDATA 4]]></item>
-        <!-- 5 -->
-        <item>Hello, 5!</item>
-        <!-- 6 -->
-        <item>Hello, 6!</item>
-        <!-- 7 -->
-        <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
-        doc
-    );
-
-    $used = $end - $start;
-    $kb   = round($used/1024.2);
-
-    expect($kb)->toBeLessThan(10);
-});
+}

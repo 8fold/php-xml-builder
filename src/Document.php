@@ -4,132 +4,44 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
+use Stringable;
+
 use Eightfold\XMLBuilder\Contracts\Buildable;
+use Eightfold\XMLBuilder\Contracts\Contentable;
 
-// use \Stringable;
+use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
+use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
+use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
 
-// TODO: PHP8 - specify implementing Stringable
-class Document implements Buildable // implements Stringable
+class Document implements Buildable, Contentable
 {
-    private string $rootName;
+    use PropertiesImp;
+    use BuildableImp;
+    use ContentableImp;
 
-    /**
-     * @var array<Element|string>
-     */
-    private array $content = [];
-
-    /**
-     * @var array<string>
-     */
-    private array $properties = [];
-
-    /**
-     * @param  Element|string $content
-     */
-    public static function create(string $rootName, ...$content): Document
-    {
-        return new static($rootName, ...$content);
-    }
-
-    /**
-     * @param  string $rootName
-     * @param  array<Element|string>  $content
-     */
-    public static function __callStatic(string $rootName, $content = []): Document
-    {
-        return static::create($rootName, ...$content);
-    }
-
-    /**
-     * @param string $rootName <{$rootName}>
-     *                         PHP8: auto-assign local variable
-     * @param Element|string $content Content within tags.
-     *                                PHP8: union type to Element|string
-     */
-    final public function __construct(string $rootName, ...$content)
-    {
-        $this->rootName = $rootName;
-        $this->content     = $content;
-    }
-
-    public function props(string ...$properties): Document
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
-    public function build(): string
-    {
-        $doctype =
-            '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'
-            . "\n";
-        return $doctype . $this->opening() . $this->contentString()
-            . $this->closing();
+    final private function __construct(
+        private string $name,
+        string|Stringable ...$content
+    ) {
+        $this->content  = $content;
     }
 
     public function __toString(): string
     {
-        return $this->build();
+        $doctype =
+            '<?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>'
+            . "\n";
+        return $doctype . $this->opening() . implode('', $this->content)
+            . $this->closing();
     }
 
     private function opening(): string
     {
-        return '<' . $this->rootName() . $this->propertiesString() . '>';
-    }
-
-    private function propertiesString(): string
-    {
-        if (count($this->properties()) === 0) {
-            return '';
-
-        }
-
-        $b = [];
-        foreach ($this->properties() as $property) {
-            $property = explode(' ', $property, 2);
-            $b[] = $property[0] . '="' . $property[1] . '"';
-
-        }
-
-        return ' ' . implode(' ', $b);
-    }
-
-    /**
-     * @return array<string>
-     */
-    private function properties(): array
-    {
-        return $this->properties;
+        return '<' . $this->name . $this->propertiesString() . '>';
     }
 
     private function closing(): string
     {
-        return '</' . $this->rootName() . '>';
-    }
-
-    private function rootName(): string
-    {
-        return $this->rootName;
-    }
-
-    /**
-     * @return array<Element|string> [description]
-     */
-    private function content(): array
-    {
-        return $this->content;
-    }
-
-    private function contentString(): string
-    {
-        $b = '';
-        foreach ($this->content() as $inner) {
-            $b .= (is_a($inner, Element::class))
-                ? $inner->build()
-                : $inner;
-
-        }
-        return $b;
+        return '</' . $this->name . '>';
     }
 }

@@ -4,57 +4,31 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
+use Stringable;
+
 use Eightfold\XMLBuilder\Contracts\Buildable;
+use Eightfold\XMLBuilder\Contracts\Contentable;
+
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
+use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
+use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
 
-// use \Stringable;
-
-// TODO: PHP8 - specify implementing Stringable
-class Element implements Buildable // implements Stringable
+class Element implements Buildable, Contentable
 {
     use PropertiesImp;
-
-    private string $elementName;
+    use BuildableImp;
+    use ContentableImp;
 
     private bool $omitEndTag = false;
 
-    /**
-     * @var array<Element|string>
-     */
-    private array $content = [];
-
-    /**
-     * @param string $elementName
-     * @param array<Element|string> $content
-     */
-    public static function __callStatic(
-        string $elementName,
-        $content = []
-    ): Element {
-        return static::create($elementName, ...$content);
+    final private function __construct(
+        private string $name,
+        string|Stringable ...$content
+    ) {
+        $this->content = $content;
     }
 
-    /**
-     * @param Element|string $content
-     */
-    public static function create(string $elementName, ...$content): Element
-    {
-        return new static($elementName, ...$content);
-    }
-
-    /**
-     * @param string $elementName <{$elementName}>
-     *                            PHP8: auto-assign local variable
-     * @param Element|string $content Content within tags.
-     *                                PHP8: union type to Element|string
-     */
-    final public function __construct(string $elementName, ...$content)
-    {
-        $this->elementName = $elementName;
-        $this->content     = $content;
-    }
-
-    public function omitEndTag(): Element
+    public function omitEndTag(): static
     {
         $this->omitEndTag = true;
 
@@ -66,26 +40,21 @@ class Element implements Buildable // implements Stringable
         return ' />';
     }
 
-    public function build(): string
-    {
-        return $this->opening() . $this->contentString() . $this->closing();
-    }
-
     public function __toString(): string
     {
-        return $this->build();
+        return $this->opening() . implode('', $this->content) . $this->closing();
     }
 
     private function opening(): string
     {
         if ($this->shouldOmitEndTag()) {
             return '<' .
-                $this->elementName() .
+                $this->name .
                 $this->propertiesString() .
                 $this->omitEndTagClosingString();
 
         }
-        return '<' . $this->elementName() . $this->propertiesString() . '>';
+        return '<' . $this->name . $this->propertiesString() . '>';
     }
 
     private function shouldOmitEndTag(): bool
@@ -99,31 +68,6 @@ class Element implements Buildable // implements Stringable
             return '';
 
         }
-        return '</' . $this->elementName() . '>';
-    }
-
-    private function elementName(): string
-    {
-        return $this->elementName;
-    }
-
-    /**
-     * @return array<Element|string>
-     */
-    private function content(): array
-    {
-        return $this->content;
-    }
-
-    private function contentString(): string
-    {
-        $b = '';
-        foreach ($this->content() as $inner) {
-            $b .= (is_a($inner, Element::class))
-                ? $inner->build()
-                : $inner;
-
-        }
-        return $b;
+        return '</' . $this->name . '>';
     }
 }

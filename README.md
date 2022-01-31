@@ -112,6 +112,13 @@ Output (unformatted):
 <tag /></root>
 ```
 
+### Compatibility
+
+|XML Builder version |PHP version |
+|:------------------:|:----------:|
+|1+                  |8.0+        |
+|0+                  |7.4+        |
+
 ## Details
 
 This library primarily came about from an experiment in which PHP was viewed
