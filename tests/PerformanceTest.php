@@ -62,7 +62,7 @@ class PerformanceTest extends TestCase
         $elapsed = $end - $start;
         $ms      = $elapsed/1e+6;
 
-        $this->assertLessThan(0.2, $ms);
+        $this->assertLessThan(0.1, $ms);
     }
 
     /**
@@ -114,6 +114,6 @@ class PerformanceTest extends TestCase
         $used = $end - $start;
         $kb   = round($used/1024.2);
 
-        $this->assertLessThan(10, $kb);
+        $this->assertLessThan(8, $kb);
     }
 }
