@@ -12,12 +12,12 @@ class Cdata implements Buildable
 {
     use BuildableImp;
 
-    public static function create(string $content): Cdata
+    public static function create(string $content): static
     {
         return new static($content);
     }
 
-    final public function __construct(private string $content)
+    final private function __construct(private string $content)
     {
     }
 
