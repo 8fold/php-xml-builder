@@ -14,9 +14,15 @@ trait Properties
     /**
      * @return static $properties [description]
      */
-    public function props(string ...$properties)
+    public function props(string ...$properties): static
     {
         $this->properties = $properties;
+        return $this;
+    }
+
+    public function prop(string $prop): static
+    {
+        $this->properties[] = $prop;
         return $this;
     }
 
@@ -24,7 +30,6 @@ trait Properties
     {
         if (count($this->properties()) === 0) {
             return '';
-
         }
 
         $b = [];

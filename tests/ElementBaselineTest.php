@@ -39,9 +39,19 @@ class ElementBaselineTest extends TestCase
      */
     public function element_can_have_properties(): void
     {
+        // basic
         $this->assertEquals(
             Element::create('root')->props('id 6', 'property hello')->build(),
             '<root id="6" property="hello"></root>'
+        );
+
+        // add
+        $this->assertEquals(
+            Element::create('root')
+                ->props('id 6', 'property hello')
+                ->prop('class something')
+                ->build(),
+            '<root id="6" property="hello" class="something"></root>'
         );
     }
 

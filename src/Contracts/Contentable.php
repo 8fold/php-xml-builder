@@ -7,7 +7,7 @@ use Stringable;
 interface Contentable
 {
     /**
-     * @param string[] $content
+     * @param array<string|Stringable> $content
      */
     public static function __callStatic(
         string $name,
