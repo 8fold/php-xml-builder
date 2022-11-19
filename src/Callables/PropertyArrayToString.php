@@ -7,7 +7,7 @@ class PropertyArrayToString
 {
     public static function convert(string ...$properties): string
     {
-        $instance = new self;
+        $instance = new self();
         return $instance(...$properties);
     }
 

@@ -49,9 +49,21 @@ class Document implements Buildable, Contentable
         return $this;
     }
 
+    public function removeEncoding(): self
+    {
+        $this->encoding = '';
+        return $this;
+    }
+
     public function setStandalone(bool $standalone = true): self
     {
         $this->standalone = ($standalone) ? 'yes' : 'no';
+        return $this;
+    }
+
+    public function removeStandalone(): self
+    {
+        $this->standalone = '';
         return $this;
     }
 
