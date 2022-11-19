@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder\Implementations;
 
+use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
+
 trait Properties
 {
     /**
@@ -28,18 +30,11 @@ trait Properties
 
     protected function propertiesString(): string
     {
-        if (count($this->properties()) === 0) {
+        $props = $this->properties();
+        if (count($props) === 0) {
             return '';
         }
-
-        $b = [];
-        foreach ($this->properties() as $property) {
-            $property = explode(' ', $property, 2);
-            $b[] = $property[0] . '="' . $property[1] . '"';
-
-        }
-
-        return ' ' . implode(' ', $b);
+        return PropertyArrayToString::convert(...$props);
     }
 
     /**
