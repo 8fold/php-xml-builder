@@ -14,6 +14,39 @@ use Eightfold\XMLBuilder\Comment;
 class DocumentBaselineTest extends TestCase
 {
     /**
+     * @test
+     */
+    public function document_can_modify_doctype_properties(): void
+    {
+        $this->assertSame(
+            '<?xml version = "1.1" encoding = "UTF-16" standalone = "no" ?>' . "\n" .
+            '<root></root>',
+            (string) Document::create('root')
+                ->setVersion(1.1)
+                ->setEncoding('UTF-16')
+                ->setStandalone(false)
+        );
+
+        $this->assertSame(
+            '<?xml version = "1.1" encoding = "UTF-16" standalone = "no" ?>' . "\n" .
+            '<root></root>',
+            (string) Document::create('root')
+                ->setVersion('1.1')
+                ->setEncoding('UTF-16')
+                ->setStandalone(false)
+        );
+
+        $this->assertSame(
+            '<?xml version = "1.0" encoding = "UTF-16" standalone = "no" ?>' . "\n" .
+            '<root></root>',
+            (string) Document::create('root')
+                ->setVersion(1)
+                ->setEncoding('UTF-16')
+                ->setStandalone(false)
+        );
+    }
+
+    /**
      *@test
      */
     public function document_is_stringable(): void
