@@ -43,7 +43,7 @@ class PerformanceTest extends TestCase
         $end = hrtime(true);
 
         $expected = <<<doc
-            <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
@@ -95,7 +95,7 @@ class PerformanceTest extends TestCase
         $end = memory_get_usage();
 
         $expected = <<<doc
-            <?xml version = "1.0" encoding = "UTF-8" standalone = "yes" ?>
+            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
