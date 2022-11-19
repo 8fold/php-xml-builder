@@ -16,6 +16,19 @@ class DocumentBaselineTest extends TestCase
     /**
      * @test
      */
+    public function document_can_remove_optional_declaration_props(): void
+    {
+        $this->assertSame(
+            '<?xml version="1.0" ?>' . "\n" . '<root></root>',
+            (string) Document::create('root')
+                ->removeEncoding()
+                ->removeStandalone()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function document_can_modify_declaration_properties(): void
     {
         $this->assertSame(
