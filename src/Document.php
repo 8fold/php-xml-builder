@@ -6,6 +6,8 @@ namespace Eightfold\XMLBuilder;
 
 use Stringable;
 
+use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
+
 use Eightfold\XMLBuilder\Contracts\Buildable;
 use Eightfold\XMLBuilder\Contracts\Contentable;
 
@@ -55,10 +57,19 @@ class Document implements Buildable, Contentable
 
     public function __toString(): string
     {
+        $declarationProps = [];
+        $declarationProps[] = 'version ' . $this->version;
+
+        if (strlen($this->encoding) > 0) {
+            $declarationProps[] = 'encoding ' . $this->encoding;
+        }
+
+        if (strlen($this->standalone) > 0) {
+            $declarationProps[] = 'standalone ' . $this->standalone;
+        }
+
         $doctype =
-            '<?xml version = "' . $this->version .
-            '" encoding = "' . $this->encoding .
-            '" standalone = "' . $this->standalone . '" ?>'
+            '<?xml' . PropertyArrayToString::convert(...$declarationProps) . ' ?>'
             . "\n";
         return $doctype . $this->opening() . implode('', $this->content)
             . $this->closing();
