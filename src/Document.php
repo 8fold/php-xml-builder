@@ -56,7 +56,9 @@ class Document implements Buildable, Contentable
     public function __toString(): string
     {
         $doctype =
-            '<?xml version = "' . $this->version . '" encoding = "' . $this->encoding . '" standalone = "' . $this->standalone . '" ?>'
+            '<?xml version = "' . $this->version .
+            '" encoding = "' . $this->encoding .
+            '" standalone = "' . $this->standalone . '" ?>'
             . "\n";
         return $doctype . $this->opening() . implode('', $this->content)
             . $this->closing();
