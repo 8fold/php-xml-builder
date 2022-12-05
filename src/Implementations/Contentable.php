@@ -14,7 +14,7 @@ trait Contentable
     private array $content = [];
 
     /**
-     * @param array<string|String> $content
+     * @param array<string|Stringable> $content
      */
     public static function __callStatic(
         string $name,
