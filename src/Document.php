@@ -29,13 +29,6 @@ class Document implements Buildable, Contentable
 
     private string $standalone = 'yes';
 
-    final private function __construct(
-        private string $name,
-        string|Stringable ...$content
-    ) {
-        $this->content  = $content;
-    }
-
     public function setVersion(string|float|int $version): self
     {
         if (is_int($version)) {

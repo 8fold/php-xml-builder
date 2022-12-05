@@ -23,13 +23,6 @@ class Element implements Buildable, Contentable
 
     private bool $omitEndTag = false;
 
-    final private function __construct(
-        private string $name,
-        string|Stringable ...$content
-    ) {
-        $this->content = $content;
-    }
-
     public function omitEndTag(): static
     {
         $this->omitEndTag = true;
