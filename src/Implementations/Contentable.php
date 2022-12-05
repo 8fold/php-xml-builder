@@ -29,4 +29,11 @@ trait Contentable
     ): static {
         return new static($name, ...$content);
     }
+
+    final private function __construct(
+        private string $name,
+        string|Stringable ...$content
+    ) {
+        $this->content = $content;
+    }
 }
