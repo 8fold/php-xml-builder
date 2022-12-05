@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Stringable;
-
-use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
-
 use Eightfold\XMLBuilder\Contracts\Buildable;
 use Eightfold\XMLBuilder\Contracts\Contentable;
+
+use Stringable;
+
+use Eightfold\XMLBuilder\Concatenate;
+
+use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
 
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
 use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
@@ -83,7 +85,9 @@ class Document implements Buildable, Contentable
         $doctype =
             '<?xml' . PropertyArrayToString::convert(...$declarationProps) . ' ?>'
             . "\n";
-        return $doctype . $this->opening() . implode('', $this->content)
+        return $doctype
+            . $this->opening()
+            . Concatenate::create(...$this->content)
             . $this->closing();
     }
 
