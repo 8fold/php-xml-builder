@@ -35,38 +35,27 @@ class DocumentBaselineTest extends TestCase
             '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
-                ->setVersion(1.1)
-                ->setEncoding('UTF-16')
-                ->setStandalone(false)
+                ->withVersion(1.1)
+                ->withEncoding('UTF-16')
+                ->withStandalone(false)
         );
 
         $this->assertSame(
             '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
-                ->setVersion('1.1')
-                ->setEncoding('UTF-16')
-                ->setStandalone(false)
+                ->withVersion('1.1')
+                ->withEncoding('UTF-16')
+                ->withStandalone(false)
         );
 
         $this->assertSame(
             '<?xml version="1.0" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
-                ->setVersion(1)
-                ->setEncoding('UTF-16')
-                ->setStandalone(false)
-        );
-    }
-
-    /**
-     *@test
-     */
-    public function document_is_stringable(): void
-    {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root id="6" property="hello"></root>',
-            (string) Document::create('root')->props('id 6', 'property hello')
+                ->withVersion(1)
+                ->withEncoding('UTF-16')
+                ->withStandalone(false)
         );
     }
 

@@ -35,26 +35,10 @@ class Document implements Stringable, Contentable
         return $this;
     }
 
-    /**
-     * @deprecated 1.4 Use `withVersion` instead.
-     */
-    public function setVersion(string|float|int $version): self
-    {
-        return $this->withVersion($version);
-    }
-
     public function withEncoding(string $encoding): self
     {
         $this->encoding = $encoding;
         return $this;
-    }
-
-    /**
-     * @deprecated 1.4 Use `withEncoding` instead.
-     */
-    public function setEncoding(string $encoding): self
-    {
-        return $this->withEncoding($encoding);
     }
 
     public function removeEncoding(): self
@@ -67,14 +51,6 @@ class Document implements Stringable, Contentable
     {
         $this->standalone = ($standalone) ? 'yes' : 'no';
         return $this;
-    }
-
-    /**
-     * @deprecated 1.4 Use `withStandalone` instead.
-     */
-    public function setStandalone(bool $standalone = true): self
-    {
-        return $this->withStandalone($standalone);
     }
 
     public function removeStandalone(): self
