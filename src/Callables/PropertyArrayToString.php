@@ -17,7 +17,6 @@ class PropertyArrayToString
         foreach ($properties as $property) {
             $property = explode(' ', $property, 2);
             $b[] = $property[0] . '="' . $property[1] . '"';
-
         }
 
         return ' ' . implode(' ', $b);

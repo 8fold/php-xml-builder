@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Stringable;
-
 use Eightfold\XMLBuilder\Contracts\Buildable;
 use Eightfold\XMLBuilder\Contracts\Contentable;
+
+use Stringable;
+
+use Eightfold\XMLBuilder\Concatenate;
 
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
 use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
@@ -20,13 +22,6 @@ class Element implements Buildable, Contentable
     use ContentableImp;
 
     private bool $omitEndTag = false;
-
-    final private function __construct(
-        private string $name,
-        string|Stringable ...$content
-    ) {
-        $this->content = $content;
-    }
 
     public function omitEndTag(): static
     {
@@ -42,7 +37,9 @@ class Element implements Buildable, Contentable
 
     public function __toString(): string
     {
-        return $this->opening() . implode('', $this->content) . $this->closing();
+        return $this->opening()
+            . Concatenate::create(...$this->content)
+            . $this->closing();
     }
 
     private function opening(): string

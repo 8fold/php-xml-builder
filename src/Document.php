@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Stringable;
-
-use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
-
 use Eightfold\XMLBuilder\Contracts\Buildable;
 use Eightfold\XMLBuilder\Contracts\Contentable;
+
+use Stringable;
+
+use Eightfold\XMLBuilder\Concatenate;
+
+use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
 
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
 use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
@@ -27,14 +29,7 @@ class Document implements Buildable, Contentable
 
     private string $standalone = 'yes';
 
-    final private function __construct(
-        private string $name,
-        string|Stringable ...$content
-    ) {
-        $this->content  = $content;
-    }
-
-    public function setVersion(string|float|int $version): self
+    public function withVersion(string|float|int $version): self
     {
         if (is_int($version)) {
             $version = strval($version) . '.0';
@@ -43,10 +38,26 @@ class Document implements Buildable, Contentable
         return $this;
     }
 
-    public function setEncoding(string $encoding): self
+    /**
+     * @deprecated 1.4 Use `withVersion` instead.
+     */
+    public function setVersion(string|float|int $version): self
+    {
+        return $this->withVersion($version);
+    }
+
+    public function withEncoding(string $encoding): self
     {
         $this->encoding = $encoding;
         return $this;
+    }
+
+    /**
+     * @deprecated 1.4 Use `withEncoding` instead.
+     */
+    public function setEncoding(string $encoding): self
+    {
+        return $this->withEncoding($encoding);
     }
 
     public function removeEncoding(): self
@@ -55,10 +66,18 @@ class Document implements Buildable, Contentable
         return $this;
     }
 
-    public function setStandalone(bool $standalone = true): self
+    public function withStandalone(bool $standalone): self
     {
         $this->standalone = ($standalone) ? 'yes' : 'no';
         return $this;
+    }
+
+    /**
+     * @deprecated 1.4 Use `withStandalone` instead.
+     */
+    public function setStandalone(bool $standalone = true): self
+    {
+        return $this->withStandalone($standalone);
     }
 
     public function removeStandalone(): self
@@ -83,7 +102,9 @@ class Document implements Buildable, Contentable
         $doctype =
             '<?xml' . PropertyArrayToString::convert(...$declarationProps) . ' ?>'
             . "\n";
-        return $doctype . $this->opening() . implode('', $this->content)
+        return $doctype
+            . $this->opening()
+            . Concatenate::create(...$this->content)
             . $this->closing();
     }
 
