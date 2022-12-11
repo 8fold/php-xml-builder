@@ -1,15 +1,14 @@
 # 8fold XML Builder for PHP
 
 XML Builder is designed to build a `string`, not a document object model (DOM)
-or abstract syntax tree (AST). If you are looking to achieve either a DOM or AST,
-there are other libraries and native implementations to do so
-([PHP:DOM](https://www.php.net/manual/en/simplexml.examples-basic.php) and
-[SimpleXML](https://www.php.net/manual/en/simplexml.examples-basic.php), for example).
+or abstract syntax tree (AST).
+
+For DOM or AST, there are other libraries and native implementations (ex. [PHP:DOM](https://www.php.net/manual/en/book.dom.php) and [SimpleXML](https://www.php.net/manual/en/simplexml.examples-basic.php)).
 
 You might use XML Builder to generate a string you feed into either PHP:DOM or
 Simple XML. Or, use the string as the body of an HTTP response.
 
-Use the `Element` class to create individual nodes within the document itself.
+Use the `Element` class to create individual nodes within the document.
 
 Use the `Document` class to generate the doctype declaration and root level element.
 
@@ -52,10 +51,9 @@ Output (formatted):
 </root>
 ```
 
-Alternatively, there is a shorthand variation that can also be used.
+Alternatively, there is a shorthand variation.
 
-The shorthand method uses the `__callStatic` PHP magic method to use the method
-name called as the document and element name, respectively.
+The shorthand method uses the `__callStatic` PHP magic method.
 
 ```php
 use Eightfold\XMLBuilder\Document;
@@ -72,7 +70,7 @@ Document::root(
 // output: Same as previous example.
 ```
 
-Both the `Document` and `Element` classes can be converted directly to a `string` using the `__toString()` magic method.
+Both the `Document` and `Element` classes can be converted directly to a `string` using the `__toString()` PHP magic method.
 
 ```php
 use Eightfold\XMLBuilder\Document;
@@ -89,7 +87,7 @@ echo Document::root(
 // output: Same as previous example.
 ```
 
-Comments are also available:
+Comments are available:
 
 ```php
 use Eightfold\XMLBuilder\Document;
@@ -121,16 +119,11 @@ Output (unformatted):
 
 ## Details
 
-This library primarily came about from an experiment in which PHP was viewed
-without the additional capability of being a template engine. No need to parse a
-string to generate a complete string and future response.
+The origins of this library was an experiment where PHP was viewed as a "pure" programming language, not a template engine that grew into being a language.
 
-The secondary pain point was to keep the feel of writing human-friendly XML
-(tabs and spaces) while reducing the potential for human error; specifically,
-mismatched beginning and ending tags.
+The primary pain point was to maintain the feel of writing human-readable XML (tabs and spaces) while reducing the risk of human error; specifically, mismatched beginning and end tags.
 
-Finally, working with PHP:DOM and SimpleXML felt cumbersome when generating HTML
-and XML documents.
+The secondary pain point was that PHP:DOM and SimpleXML felt cumbersome when generating XML and HTML documents.
 
 ## Other
 
