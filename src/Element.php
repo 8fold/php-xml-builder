@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Eightfold\XMLBuilder\Contracts\Buildable;
-use Eightfold\XMLBuilder\Contracts\Contentable;
-
 use Stringable;
+
+use Eightfold\XMLBuilder\Contracts\Contentable;
 
 use Eightfold\XMLBuilder\Concatenate;
 
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
-use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
 use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
 
-class Element implements Buildable, Contentable
+class Element implements Stringable, Contentable
 {
     use PropertiesImp;
-    use BuildableImp;
     use ContentableImp;
 
     private bool $omitEndTag = false;

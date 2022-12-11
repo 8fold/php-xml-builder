@@ -4,14 +4,10 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Eightfold\XMLBuilder\Contracts\Buildable;
+use Stringable;
 
-use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
-
-class Cdata implements Buildable
+class Cdata implements Stringable
 {
-    use BuildableImp;
-
     public static function create(string $content): static
     {
         return new static($content);

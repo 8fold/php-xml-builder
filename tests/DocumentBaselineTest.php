@@ -81,11 +81,11 @@ class DocumentBaselineTest extends TestCase
             '<root>' . "\n" .
             '<!-- comment -->' . "\n" .
             '<tag /></root>',
-            Document::create(
+            (string) Document::create(
                 'root',
                 Comment::create('comment'),
                 Element::create('tag')->omitEndTag()
-            )->build()
+            )
         );
     }
 
@@ -96,7 +96,7 @@ class DocumentBaselineTest extends TestCase
     {
         $this->assertSame(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root id="6" property="hello"></root>',
-            Document::create('root')->props('id 6', 'property hello')->build()
+            (string) Document::create('root')->props('id 6', 'property hello')
         );
     }
 
@@ -107,12 +107,12 @@ class DocumentBaselineTest extends TestCase
     {
         $this->assertSame(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
-            Document::root(
+            (string) Document::root(
                 Element::child(
                     Element::grandchild(),
                     Cdata::create('String')
                 )
-            )->build()
+            )
         );
     }
 
@@ -123,13 +123,13 @@ class DocumentBaselineTest extends TestCase
     {
         $this->assertSame(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
-            Document::create(
+            (string) Document::create(
                 'root',
                 Element::create('child',
                     Element::create('grandchild'),
                     Cdata::create('String')
                 )
-            )->build()
+            )
         );
     }
 
@@ -140,7 +140,7 @@ class DocumentBaselineTest extends TestCase
     {
         $this->assertSame(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<tag></tag>',
-            Document::create('tag')->build()
+            (string) Document::create('tag')
         );
     }
 }
