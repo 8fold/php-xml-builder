@@ -25,12 +25,12 @@ use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
 use Eightfold\XMLBuilder\Cdata;
 
-Document::create('root',
+echo Document::create('root',
   Element::create('child',
     Element::create('grandchild')->omitEndTag()->props('name Xavier'),
     Cdata::create('Hello, my name is Xavier!')
   )
-)->build();
+);
 ```
 
 Output:
@@ -60,23 +60,6 @@ use Eightfold\XMLBuilder\Document;
 use Eightfold\XMLBuilder\Element;
 use Eightfold\XMLBuilder\Cdata;
 
-Document::root(
-  Element::child(
-    Element::grandchild()->omitEndTag()->props('name Xavier'),
-    Cdata::create('Hello, my name is Xavier!')
-  )
-)->build();
-
-// output: Same as previous example.
-```
-
-Both the `Document` and `Element` classes can be converted directly to a `string` using the `__toString()` PHP magic method.
-
-```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
-
 echo Document::root(
   Element::child(
     Element::grandchild()->omitEndTag()->props('name Xavier'),
@@ -98,7 +81,7 @@ echo Document::create(
   'root',
   Comment::create('comment'),
   Element::create('tag')->omitEndTag()
-)->build()
+);
 ```
 
 Output (unformatted):
