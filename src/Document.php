@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder;
 
-use Eightfold\XMLBuilder\Contracts\Buildable;
-use Eightfold\XMLBuilder\Contracts\Contentable;
-
 use Stringable;
+
+use Eightfold\XMLBuilder\Contracts\Contentable;
 
 use Eightfold\XMLBuilder\Concatenate;
 
 use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
 
 use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
-use Eightfold\XMLBuilder\Implementations\Buildable as BuildableImp;
 use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
 
-class Document implements Buildable, Contentable
+class Document implements Stringable, Contentable
 {
     use PropertiesImp;
-    use BuildableImp;
     use ContentableImp;
 
     private string $version = '1.0';
@@ -38,26 +35,10 @@ class Document implements Buildable, Contentable
         return $this;
     }
 
-    /**
-     * @deprecated 1.4 Use `withVersion` instead.
-     */
-    public function setVersion(string|float|int $version): self
-    {
-        return $this->withVersion($version);
-    }
-
     public function withEncoding(string $encoding): self
     {
         $this->encoding = $encoding;
         return $this;
-    }
-
-    /**
-     * @deprecated 1.4 Use `withEncoding` instead.
-     */
-    public function setEncoding(string $encoding): self
-    {
-        return $this->withEncoding($encoding);
     }
 
     public function removeEncoding(): self
@@ -70,14 +51,6 @@ class Document implements Buildable, Contentable
     {
         $this->standalone = ($standalone) ? 'yes' : 'no';
         return $this;
-    }
-
-    /**
-     * @deprecated 1.4 Use `withStandalone` instead.
-     */
-    public function setStandalone(bool $standalone = true): self
-    {
-        return $this->withStandalone($standalone);
     }
 
     public function removeStandalone(): self
