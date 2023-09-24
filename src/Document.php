@@ -26,7 +26,7 @@ class Document implements Stringable, Contentable
 
     private string $standalone = 'yes';
 
-    public function withVersion(string|float|int $version): self
+    public function withVersion(string|Stringable|float|int $version): self
     {
         if (is_int($version)) {
             $version = strval($version) . '.0';
@@ -35,7 +35,7 @@ class Document implements Stringable, Contentable
         return $this;
     }
 
-    public function withEncoding(string $encoding): self
+    public function withEncoding(string|Stringable $encoding): self
     {
         $this->encoding = $encoding;
         return $this;

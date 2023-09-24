@@ -8,12 +8,12 @@ use Stringable;
 
 class Comment implements Stringable
 {
-    public static function create(string $content): static
+    public static function create(string|Stringable $content): static
     {
         return new static($content);
     }
 
-    final private function __construct(private string $content)
+    final private function __construct(private string|Stringable $content)
     {
     }
 

@@ -16,13 +16,13 @@ trait Properties
     /**
      * @return static $properties [description]
      */
-    public function props(string ...$properties): static
+    public function props(string|Stringable ...$properties): static
     {
         $this->properties = $properties;
         return $this;
     }
 
-    public function prop(string $prop): static
+    public function prop(string|Stringable $prop): static
     {
         $this->properties[] = $prop;
         return $this;

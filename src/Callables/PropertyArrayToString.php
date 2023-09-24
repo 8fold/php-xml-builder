@@ -5,13 +5,13 @@ namespace Eightfold\XMLBuilder\Callables;
 
 class PropertyArrayToString
 {
-    public static function convert(string ...$properties): string
+    public static function convert(string|Stringable ...$properties): string
     {
         $instance = new self();
         return $instance(...$properties);
     }
 
-    public function __invoke(string ...$properties): string
+    public function __invoke(string|Stringable ...$properties): string
     {
         $b = [];
         foreach ($properties as $property) {
