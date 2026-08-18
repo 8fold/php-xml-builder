@@ -97,6 +97,7 @@ Output (unformatted):
 
 |XML Builder version |PHP version |
 |:------------------:|:----------:|
+|3+                  |8.4+        |
 |1+                  |8.0+        |
 |0+                  |7.4+        |
 
