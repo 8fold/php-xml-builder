@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use Eightfold\XMLBuilder\Document;
@@ -13,9 +14,7 @@ use Eightfold\XMLBuilder\Comment;
 
 class DocumentBaselineTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function document_can_remove_optional_declaration_props(): void
     {
         $this->assertSame(
@@ -26,9 +25,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function document_can_modify_declaration_properties(): void
     {
         $this->assertSame(
@@ -59,9 +56,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_can_have_comment(): void
     {
         $this->assertSame(
@@ -78,9 +73,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_can_have_properties(): void
     {
         $this->assertSame(
@@ -89,9 +82,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_can_use_shorthand(): void
     {
         $this->assertSame(
@@ -105,9 +96,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_can_accept_content(): void
     {
         $this->assertSame(
@@ -122,9 +111,7 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_can_initialized_statically(): void
     {
         $this->assertSame(
