@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use Eightfold\XMLBuilder\Concatenate;
@@ -12,9 +13,7 @@ use Eightfold\XMLBuilder\Element;
 
 class ConcatenateBaselineTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function concatenate_expected_content(): void
     {
         $expected = '<p>Hello, World!</p> Testing additional string.';

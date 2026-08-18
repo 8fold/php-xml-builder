@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Eightfold\XMLBuilder\Tests;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use Eightfold\XMLBuilder\Document;
@@ -13,9 +14,7 @@ use Eightfold\XMLBuilder\Comment;
 
 class PerformanceTest extends TestCase
 {
-    /**
-     *@test
-     */
+    #[Test]
     public function document_is_speedy(): void
     {
         $start = hrtime(true);
@@ -65,9 +64,7 @@ class PerformanceTest extends TestCase
         $this->assertLessThan(0.2, $ms);
     }
 
-    /**
-     *@test
-     */
+    #[Test]
     public function document_is_small(): void
     {
         $start = memory_get_usage();
