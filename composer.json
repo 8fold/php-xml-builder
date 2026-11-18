@@ -17,12 +17,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Eightfold\\XMLBuilder\\": "./src"
+      "Eightfold\\XmlBuilder_\\": "./src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Eightfold\\XMLBuilder\\Tests\\": "./tests"
+      "Eightfold\\XmlBuilder_\\Tests\\": "./tests"
     }
   },
   "repositories": [],

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Implementations;
+namespace Eightfold\XmlBuilder_\Implementations;
 
-use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
+use Eightfold\XmlBuilder_\Callables\PropertyArrayToString;
 
 trait Properties
 {

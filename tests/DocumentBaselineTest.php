@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder_\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
-use Eightfold\XMLBuilder\Comment;
+use Eightfold\XmlBuilder_\Document;
+use Eightfold\XmlBuilder_\Element;
+use Eightfold\XmlBuilder_\Cdata;
+use Eightfold\XmlBuilder_\Comment;
 
 class DocumentBaselineTest extends TestCase
 {

@@ -21,9 +21,9 @@ Use the `Document` class to generate the doctype declaration and root level elem
 Warning: Users of this library are responsible for sanitizing content.
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder_\Document;
+use Eightfold\XmlBuilder_\Element;
+use Eightfold\XmlBuilder_\Cdata;
 
 echo Document::create('root',
   Element::create('child',
@@ -56,9 +56,9 @@ Alternatively, there is a shorthand variation.
 The shorthand method uses the `__callStatic` PHP magic method.
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder_\Document;
+use Eightfold\XmlBuilder_\Element;
+use Eightfold\XmlBuilder_\Cdata;
 
 echo Document::root(
   Element::child(
@@ -73,9 +73,9 @@ echo Document::root(
 Comments are available:
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder_\Document;
+use Eightfold\XmlBuilder_\Element;
+use Eightfold\XmlBuilder_\Cdata;
 
 echo Document::create(
   'root',

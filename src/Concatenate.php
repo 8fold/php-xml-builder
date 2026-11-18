@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder;
+namespace Eightfold\XmlBuilder_;
 
 use Stringable;
 
-use Eightfold\XMLBuilder\Contracts\ContentWithoutElement;
+use Eightfold\XmlBuilder_\Contracts\ContentWithoutElement;
 
-use Eightfold\XMLBuilder\Implementations\ContentWithoutElement as ContentWithoutElementImp;
+use Eightfold\XmlBuilder_\Implementations\ContentWithoutElement as ContentWithoutElementImp;
 
 class Concatenate implements Stringable, ContentWithoutElement
 {

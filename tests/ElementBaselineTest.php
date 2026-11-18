@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder_\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Element;
+use Eightfold\XmlBuilder_\Element;
 
 class ElementBaselineTest extends TestCase
 {

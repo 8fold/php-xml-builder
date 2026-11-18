@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder;
+namespace Eightfold\XmlBuilder_;
 
 use Stringable;
 
-use Eightfold\XMLBuilder\Contracts\Contentable;
+use Eightfold\XmlBuilder_\Contracts\Contentable;
 
-use Eightfold\XMLBuilder\Concatenate;
+use Eightfold\XmlBuilder_\Concatenate;
 
-use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
+use Eightfold\XmlBuilder_\Callables\PropertyArrayToString;
 
-use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
-use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
+use Eightfold\XmlBuilder_\Implementations\Properties as PropertiesImp;
+use Eightfold\XmlBuilder_\Implementations\Contentable as ContentableImp;
 
 class Document implements Stringable, Contentable
 {

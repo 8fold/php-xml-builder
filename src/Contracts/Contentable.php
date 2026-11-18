@@ -1,6 +1,6 @@
 <?php
 
-namespace Eightfold\XMLBuilder\Contracts;
+namespace Eightfold\XmlBuilder_\Contracts;
 
 use Stringable;
 

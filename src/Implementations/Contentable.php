@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Implementations;
+namespace Eightfold\XmlBuilder_\Implementations;
 
 use Stringable;
 
