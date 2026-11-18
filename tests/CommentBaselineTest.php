@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use Eightfold\XmlBuilder\Comment;
 
 class CommentBaselineTest extends TestCase
 {
-    #[Test]
-    public function comment_can_be_initialized_statically(): void
+    public function test_comment_can_be_initialized_statically(): void
     {
         parent::assertSame(
             "\n" . '<!-- content -->' . "\n",

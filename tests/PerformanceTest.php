@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 use Eightfold\XmlBuilder\Document;
@@ -14,8 +13,7 @@ use Eightfold\XmlBuilder\Comment;
 
 class PerformanceTest extends TestCase
 {
-    #[Test]
-    public function document_is_speedy(): void
+    public function test_document_is_speedy(): void
     {
         $start = hrtime(true);
 
@@ -42,7 +40,7 @@ class PerformanceTest extends TestCase
         $end = hrtime(true);
 
         $expected = <<<doc
-            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+            <?xml encoding="UTF-8" standalone="yes" version="1.0" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
@@ -64,8 +62,7 @@ class PerformanceTest extends TestCase
         parent::assertLessThan(0.2, $ms);
     }
 
-    #[Test]
-    public function document_is_small(): void
+    public function test_document_is_small(): void
     {
         $start = memory_get_usage();
 
@@ -92,7 +89,7 @@ class PerformanceTest extends TestCase
         $end = memory_get_usage();
 
         $expected = <<<doc
-            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+            <?xml encoding="UTF-8" standalone="yes" version="1.0" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
