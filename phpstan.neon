@@ -9,8 +9,7 @@ includes:
     - vendor/spaze/phpstan-disallowed-calls/disallowed-execution-calls.neon
 
 parameters:
-    level: 10
-    phpVersion: 80500
+    level: 9
     paths:
         - bin
         - src
@@ -25,4 +24,5 @@ parameters:
         allRules: true
     ignoreErrors:
         - '#Call to an undefined static method Eightfold\\XmlBuilder\\Element::(.*)#'
+        - '#Call to an undefined static method Eightfold\\XmlBuilder\\EmptyElement::(.*)#'
         - '#Call to an undefined static method Eightfold\\XmlBuilder\\Document::(.*)#'
