@@ -3,19 +3,17 @@
   "description": "A library for building XML document and element strings.",
   "type": "library",
   "license": "MIT",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "Josh Bruce",
-      "email": "josh@8fold.pro"
+      "email": "josh@8fold.pro",
+      "homepage": "https://joshbruce.com",
+      "role": "Lead Developer"
     }
   ],
-  "require": {
-    "php": "^8.4"
-  },
-  "require-dev": {
-    "phpstan/phpstan": "^2.2",
-    "phpunit/phpunit": "^13.2",
-    "squizlabs/php_codesniffer": "^4.0"
+  "support": {
   },
   "autoload": {
     "psr-4": {
@@ -27,15 +25,64 @@
       "Eightfold\\XMLBuilder\\Tests\\": "./tests"
     }
   },
-  "config": {
-    "preferred-install": "dist"
+  "repositories": [],
+  "require": {
+    "php": "^8.4"
   },
-  "prefer-stable": true,
+  "require-dev": {
+    "symfony/process": "^8.0",
+
+    "squizlabs/php_codesniffer": "^4.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+
+    "phpstan/phpstan": "^2.0.0",
+    "phpstan/phpstan-strict-rules": "^2.1",
+    "spaze/phpstan-disallowed-calls": "^4.15",
+    "phpstan/extension-installer": "*",
+
+    "phpunit/phpunit": "^13.0.0"
+  },
   "scripts": {
     "prod": "@production",
-    "production": ["@style", "@stan", "@test"],
-    "style": "./vendor/bin/phpcs --standard=phpcs.xml -p ./src",
-    "stan": "./vendor/bin/phpstan analyze",
-    "test": "./vendor/bin/phpunit --display-all-issues"
+    "production": [
+      "@autoload:prod",
+      "@check"
+    ],
+
+    "local": [
+      "@autoload:local",
+      "@check"
+    ],
+
+    "check": [
+      "@check:dependencies",
+      "@check:tabs",
+      "@check:style",
+      "@check:analysis",
+      "@check:test"
+    ],
+    "check:dependencies": "composer validate --no-check-publish",
+    "check:tabs": "php ./bin/check-tabs.php",
+    "check:style": "./vendor/bin/phpcs --standard=phpcs.xml",
+    "check:analysis": "./vendor/bin/phpstan analyze",
+    "check:test": "./vendor/bin/phpunit",
+    "check:test:ci": "./vendor/bin/phpunit --no-coverage --no-configuration --bootstrap vendor/autoload.php tests/",
+
+    "autoload:prod": "composer dumpautoload --no-dev --classmap-authoritative",
+    "autoload:local": "composer dumpautoload -o"
+  },
+  "extra": {
+    "phpstan/extension-installer": {
+      "ignore": [
+        "spaze/phpstan-disallowed-calls"
+      ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true
   }
 }
