@@ -25,3 +25,4 @@ parameters:
         allRules: true
     ignoreErrors:
         - '#Call to an undefined static method Eightfold\\XmlBuilder\\Element::(.*)#'
+        - '#Call to an undefined static method Eightfold\\XmlBuilder\\Document::(.*)#'
