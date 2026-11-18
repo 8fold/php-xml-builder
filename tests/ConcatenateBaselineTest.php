@@ -23,7 +23,7 @@ class ConcatenateBaselineTest extends TestCase
             ' Testing additional string.'
         );
 
-        $this->assertSame(
+        parent::assertSame(
             $expected,
             $result
         );

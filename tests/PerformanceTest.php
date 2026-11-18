@@ -56,12 +56,12 @@ class PerformanceTest extends TestCase
             <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
             doc;
 
-        $this->assertEquals($expected, $result);
+        parent::assertEquals($expected, $result);
 
         $elapsed = $end - $start;
-        $ms      = $elapsed/1e+6;
+        $ms      = $elapsed / 1e+6;
 
-        $this->assertLessThan(0.2, $ms);
+        parent::assertLessThan(0.2, $ms);
     }
 
     #[Test]
@@ -106,11 +106,11 @@ class PerformanceTest extends TestCase
             <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
             doc;
 
-        $this->assertEquals($expected, $result);
+        parent::assertEquals($expected, $result);
 
         $used = $end - $start;
-        $kb   = round($used/1024.2);
+        $kb   = round($used / 1024.2);
 
-        $this->assertLessThan(8, $kb);
+        parent::assertLessThan(8, $kb);
     }
 }

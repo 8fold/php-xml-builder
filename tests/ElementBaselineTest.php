@@ -14,7 +14,7 @@ class ElementBaselineTest extends TestCase
     #[Test]
     public function element_can_omit_end_tag(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<root id="6" property="hello" />',
             (string) Element::create('root')->props('id 6', 'property hello')
                 ->omitEndTag()
@@ -25,13 +25,13 @@ class ElementBaselineTest extends TestCase
     public function element_can_have_properties(): void
     {
         // basic
-        $this->assertSame(
+        parent::assertSame(
             '<root id="6" property="hello"></root>',
             (string) Element::create('root')->props('id 6', 'property hello')
         );
 
         // add
-        $this->assertSame(
+        parent::assertSame(
             '<root id="6" property="hello" class="something"></root>',
             (string) Element::create('root')
                 ->props('id 6', 'property hello')
@@ -42,7 +42,7 @@ class ElementBaselineTest extends TestCase
     #[Test]
     public function element_can_use_shorthand(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<root><child><grandchild name="Xavier" />Xavier<!CDATA[String]]></child></root>',
             (string) Element::root(
                 Element::child(
@@ -57,10 +57,12 @@ class ElementBaselineTest extends TestCase
     #[Test]
     public function element_can_accept_content(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<root><child><grandchild></grandchild><!CDATA[String]]></child></root>',
-            (string) Element::create('root',
-                Element::create('child',
+            (string) Element::create(
+                'root',
+                Element::create(
+                    'child',
                     Element::create('grandchild'),
                     '<!CDATA[String]]>'
                 )
@@ -71,7 +73,7 @@ class ElementBaselineTest extends TestCase
     #[Test]
     public function element_can_be_initialized_statically(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<tag></tag>',
             (string) Element::create('tag')
         );

@@ -17,7 +17,7 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_remove_optional_declaration_props(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.0" ?>' . "\n" . '<root></root>',
             (string) Document::create('root')
                 ->removeEncoding()
@@ -28,7 +28,7 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_modify_declaration_properties(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
@@ -37,7 +37,7 @@ class DocumentBaselineTest extends TestCase
                 ->withStandalone(false)
         );
 
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
@@ -46,7 +46,7 @@ class DocumentBaselineTest extends TestCase
                 ->withStandalone(false)
         );
 
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.0" encoding="UTF-16" standalone="no" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
@@ -59,7 +59,7 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_have_comment(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' .
             "\n" .
             '<root>' . "\n" .
@@ -76,8 +76,9 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_have_properties(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root id="6" property="hello"></root>',
+        parent::assertSame(
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\n"
+            . '<root id="6" property="hello"></root>',
             (string) Document::create('root')->props('id 6', 'property hello')
         );
     }
@@ -85,8 +86,9 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_use_shorthand(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
+        parent::assertSame(
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\n"
+            . '<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
             (string) Document::root(
                 Element::child(
                     Element::grandchild(),
@@ -99,11 +101,13 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_accept_content(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
+        parent::assertSame(
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\n"
+            . '<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
             (string) Document::create(
                 'root',
-                Element::create('child',
+                Element::create(
+                    'child',
                     Element::create('grandchild'),
                     Cdata::create('String')
                 )
@@ -114,8 +118,8 @@ class DocumentBaselineTest extends TestCase
     #[Test]
     public function document_can_initialized_statically(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<tag></tag>',
+        parent::assertSame(
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\n" . '<tag></tag>',
             (string) Document::create('tag')
         );
     }

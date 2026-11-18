@@ -14,7 +14,7 @@ class CommentBaselineTest extends TestCase
     #[Test]
     public function comment_can_be_initialized_statically(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             "\n" . '<!-- content -->' . "\n",
             (string) Comment::create('content')
         );

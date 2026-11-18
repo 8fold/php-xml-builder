@@ -14,7 +14,7 @@ class CdataBaselineTest extends TestCase
     #[Test]
     public function cdata_can_be_initialized_statically(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<![CDATA[content]]>',
             (string) Cdata::create('content')
         );
