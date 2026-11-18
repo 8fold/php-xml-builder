@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Comment;
+use Eightfold\XmlBuilder\Comment;
 
 class CommentBaselineTest extends TestCase
 {
-    #[Test]
-    public function comment_can_be_initialized_statically(): void
+    public function test_comment_can_be_initialized_statically(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             "\n" . '<!-- content -->' . "\n",
             (string) Comment::create('content')
         );

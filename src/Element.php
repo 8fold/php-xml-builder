@@ -1,64 +1,86 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder;
+namespace Eightfold\XmlBuilder;
+
+use Eightfold\XmlBuilder\PropertyInterface;
 
 use Stringable;
 
-use Eightfold\XMLBuilder\Contracts\Contentable;
+use Eightfold\XmlBuilder\Properties;
 
-use Eightfold\XMLBuilder\Concatenate;
-
-use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
-use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
-
-class Element implements Stringable, Contentable
+class Element implements PropertyInterface
 {
-    use PropertiesImp;
-    use ContentableImp;
+    public static function create(string $name, string|Stringable ...$content): static
+    {
+        return new static($name, $content);
+    }
 
-    private bool $omitEndTag = false;
+    /**
+     * @param array<string|Stringable>  $content
+     */
+    public static function __callStatic(string $name, array $content = []): static
+    {
+        return new static($name, $content);
+    }
+
+    /**
+     * @param  array<string|Stringable>  $content
+     * @param  list<string>  $properties
+     */
+    final private function __construct(
+        private string $name,
+        private array $content = [],
+        private array $properties = [],
+        private bool $omitEndTag = false,
+    ) {
+    }
+
+    public function props(string ...$properties): static
+    {
+        $this->properties = array_values($properties);
+        return $this;
+    }
+
+    public function prop(string $prop): static
+    {
+        $this->properties[] = $prop;
+        return $this;
+    }
 
     public function omitEndTag(): static
     {
         $this->omitEndTag = true;
-
         return $this;
     }
 
-    protected function omitEndTagClosingString(): string
+    public function toString(): string
     {
-        return ' />';
+        return self::opening()
+            . implode('', array_map('strval', $this->content))
+            . self::closing();
     }
 
     public function __toString(): string
     {
-        return $this->opening()
-            . Concatenate::create(...$this->content)
-            . $this->closing();
+        return self::toString();
     }
 
     private function opening(): string
     {
-        if ($this->shouldOmitEndTag()) {
+        if ($this->omitEndTag) {
             return '<' .
                 $this->name .
-                $this->propertiesString() .
-                $this->omitEndTagClosingString();
+                Properties::compile($this->properties) .
+                ' />';
 
         }
-        return '<' . $this->name . $this->propertiesString() . '>';
-    }
-
-    private function shouldOmitEndTag(): bool
-    {
-        return $this->omitEndTag;
+        return '<' . $this->name . Properties::compile($this->properties) . '>';
     }
 
     private function closing(): string
     {
-        if ($this->shouldOmitEndTag()) {
+        if ($this->omitEndTag) {
             return '';
 
         }

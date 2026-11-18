@@ -2,22 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
-use Eightfold\XMLBuilder\Comment;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\EmptyElement;
+use Eightfold\XmlBuilder\Cdata;
+use Eightfold\XmlBuilder\Comment;
 
 class DocumentBaselineTest extends TestCase
 {
-    #[Test]
-    public function document_can_remove_optional_declaration_props(): void
+    public function test_document_can_remove_optional_declaration_props(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<?xml version="1.0" ?>' . "\n" . '<root></root>',
             (string) Document::create('root')
                 ->removeEncoding()
@@ -25,11 +24,10 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    #[Test]
-    public function document_can_modify_declaration_properties(): void
+    public function test_document_can_modify_declaration_properties(): void
     {
-        $this->assertSame(
-            '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
+        parent::assertSame(
+            '<?xml encoding="UTF-16" standalone="no" version="1.1" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
                 ->withVersion(1.1)
@@ -37,8 +35,8 @@ class DocumentBaselineTest extends TestCase
                 ->withStandalone(false)
         );
 
-        $this->assertSame(
-            '<?xml version="1.1" encoding="UTF-16" standalone="no" ?>' . "\n" .
+        parent::assertSame(
+            '<?xml encoding="UTF-16" standalone="no" version="1.1" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
                 ->withVersion('1.1')
@@ -46,8 +44,8 @@ class DocumentBaselineTest extends TestCase
                 ->withStandalone(false)
         );
 
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-16" standalone="no" ?>' . "\n" .
+        parent::assertSame(
+            '<?xml encoding="UTF-16" standalone="no" version="1.0" ?>' . "\n" .
             '<root></root>',
             (string) Document::create('root')
                 ->withVersion(1)
@@ -56,11 +54,10 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    #[Test]
-    public function document_can_have_comment(): void
+    public function test_document_can_have_comment(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' .
+        parent::assertSame(
+            '<?xml encoding="UTF-8" standalone="yes" version="1.0" ?>' .
             "\n" .
             '<root>' . "\n" .
             '<!-- comment -->' . "\n" .
@@ -73,20 +70,20 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    #[Test]
-    public function document_can_have_properties(): void
+    public function test_document_can_have_properties(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root id="6" property="hello"></root>',
+        parent::assertSame(
+            '<?xml encoding="UTF-8" standalone="yes" version="1.0" ?>' . "\n"
+            . '<root id="6" property="hello"></root>',
             (string) Document::create('root')->props('id 6', 'property hello')
         );
     }
 
-    #[Test]
-    public function document_can_use_shorthand(): void
+    public function test_document_can_use_shorthand(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
+        parent::assertSame(
+            '<?xml encoding="UTF-8" standalone="yes" version="1.0" ?>' . "\n"
+            . '<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
             (string) Document::root(
                 Element::child(
                     Element::grandchild(),
@@ -96,26 +93,26 @@ class DocumentBaselineTest extends TestCase
         );
     }
 
-    #[Test]
-    public function document_can_accept_content(): void
+    public function test_document_can_accept_content(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<root><child><grandchild></grandchild><![CDATA[String]]></child></root>',
-            (string) Document::create(
+        parent::assertSame(
+            '<?xml encoding="UTF-8" standalone="yes" version="1.0" ?>' . "\n"
+            . '<root><child><grandchild /><![CDATA[String]]></child></root>',
+            Document::create(
                 'root',
-                Element::create('child',
-                    Element::create('grandchild'),
+                Element::create(
+                    'child',
+                    EmptyElement::grandchild(),
                     Cdata::create('String')
                 )
-            )
+            )->toString()
         );
     }
 
-    #[Test]
-    public function document_can_initialized_statically(): void
+    public function test_document_can_initialized_statically(): void
     {
-        $this->assertSame(
-            '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>'."\n".'<tag></tag>',
+        parent::assertSame(
+            '<?xml encoding="UTF-8" standalone="yes" version="1.0" ?>' . "\n" . '<tag></tag>',
             (string) Document::create('tag')
         );
     }

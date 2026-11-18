@@ -2,76 +2,74 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Element;
+use Eightfold\XmlBuilder\Element;
 
 class ElementBaselineTest extends TestCase
 {
-    #[Test]
-    public function element_can_omit_end_tag(): void
+    public function test_element_can_omit_end_tag(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<root id="6" property="hello" />',
             (string) Element::create('root')->props('id 6', 'property hello')
                 ->omitEndTag()
         );
     }
 
-    #[Test]
-    public function element_can_have_properties(): void
+    public function test_element_can_have_properties(): void
     {
         // basic
-        $this->assertSame(
+        parent::assertSame(
             '<root id="6" property="hello"></root>',
             (string) Element::create('root')->props('id 6', 'property hello')
         );
 
         // add
-        $this->assertSame(
-            '<root id="6" property="hello" class="something"></root>',
+        parent::assertSame(
+            '<root class="something" id="6" property="hello"></root>',
             (string) Element::create('root')
                 ->props('id 6', 'property hello')
                 ->prop('class something')
         );
     }
 
-    #[Test]
-    public function element_can_use_shorthand(): void
+    public function test_element_can_use_shorthand(): void
     {
-        $this->assertSame(
-            '<root><child><grandchild name="Xavier" />Xavier<!CDATA[String]]></child></root>',
-            (string) Element::root(
-                Element::child(
-                    Element::grandchild('Xavier')->omitEndTag()
-                        ->props('name Xavier'),
-                    '<!CDATA[String]]>'
-                )
+        $result = (string) Element::root(
+            Element::child(
+                Element::grandchild('Xavier')->omitEndTag() // L43
+                    ->props('name Xavier'), // L44
+                '<!CDATA[String]]>'
             )
+        );
+
+        parent::assertSame(
+            '<root><child><grandchild name="Xavier" />Xavier<!CDATA[String]]></child></root>',
+            $result
         );
     }
 
-    #[Test]
-    public function element_can_accept_content(): void
+    public function test_element_can_accept_content(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<root><child><grandchild></grandchild><!CDATA[String]]></child></root>',
-            (string) Element::create('root',
-                Element::create('child',
+            Element::create(
+                'root',
+                Element::create(
+                    'child',
                     Element::create('grandchild'),
                     '<!CDATA[String]]>'
                 )
-            )
+            )->toString()
         );
     }
 
-    #[Test]
-    public function element_can_be_initialized_statically(): void
+    public function test_element_can_be_initialized_statically(): void
     {
-        $this->assertSame(
+        parent::assertSame(
             '<tag></tag>',
             (string) Element::create('tag')
         );

@@ -2,20 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
-use Eightfold\XMLBuilder\Comment;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\Cdata;
+use Eightfold\XmlBuilder\Comment;
 
 class PerformanceTest extends TestCase
 {
-    #[Test]
-    public function document_is_speedy(): void
+    public function test_document_is_speedy(): void
     {
         $start = hrtime(true);
 
@@ -42,7 +40,7 @@ class PerformanceTest extends TestCase
         $end = hrtime(true);
 
         $expected = <<<doc
-            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+            <?xml encoding="UTF-8" standalone="yes" version="1.0" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
@@ -56,16 +54,15 @@ class PerformanceTest extends TestCase
             <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
             doc;
 
-        $this->assertEquals($expected, $result);
+        parent::assertEquals($expected, $result);
 
         $elapsed = $end - $start;
-        $ms      = $elapsed/1e+6;
+        $ms      = $elapsed / 1e+6;
 
-        $this->assertLessThan(0.2, $ms);
+        parent::assertLessThan(0.2, $ms);
     }
 
-    #[Test]
-    public function document_is_small(): void
+    public function test_document_is_small(): void
     {
         $start = memory_get_usage();
 
@@ -92,7 +89,7 @@ class PerformanceTest extends TestCase
         $end = memory_get_usage();
 
         $expected = <<<doc
-            <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+            <?xml encoding="UTF-8" standalone="yes" version="1.0" ?>
             <root><item>Hello, 0!</item><item>Hello, 1!</item><item>Hello, 2!</item>
             <!-- 3 -->
             <item>Hello, 3!</item>
@@ -106,11 +103,11 @@ class PerformanceTest extends TestCase
             <item>Hello, 7!</item><item>Hello, 8!</item><item>Hello, 9!</item></root>
             doc;
 
-        $this->assertEquals($expected, $result);
+        parent::assertEquals($expected, $result);
 
         $used = $end - $start;
-        $kb   = round($used/1024.2);
+        $kb   = round($used / 1024.2);
 
-        $this->assertLessThan(8, $kb);
+        parent::assertLessThan(8, $kb);
     }
 }

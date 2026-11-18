@@ -21,9 +21,9 @@ Use the `Document` class to generate the doctype declaration and root level elem
 Warning: Users of this library are responsible for sanitizing content.
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\Cdata;
 
 echo Document::create('root',
   Element::create('child',
@@ -56,9 +56,9 @@ Alternatively, there is a shorthand variation.
 The shorthand method uses the `__callStatic` PHP magic method.
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\Cdata;
 
 echo Document::root(
   Element::child(
@@ -73,9 +73,9 @@ echo Document::root(
 Comments are available:
 
 ```php
-use Eightfold\XMLBuilder\Document;
-use Eightfold\XMLBuilder\Element;
-use Eightfold\XMLBuilder\Cdata;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\Cdata;
 
 echo Document::create(
   'root',
@@ -111,8 +111,8 @@ The secondary pain point was that PHP:DOM and SimpleXML felt cumbersome when gen
 
 ## Other
 
-- [Code of Conduct](https://github.com/8fold/php-xml-builder/blob/master/.github/CODE_OF_CONDUCT.md)
-- [Contributing](https://github.com/8fold/php-xml-builder/blob/master/.github/CONTRIBUTING.md)
-- [Governance](https://github.com/8fold/php-xml-builder/blob/master/.github/GOVERNANCE.md)
-- [Versioning](https://github.com/8fold/php-xml-builder/blob/master/.github/VERSIONING.md)
-- [Security](https://github.com/8fold/php-xml-builder/blob/master/.github/SECURITY.md)
+- [Code of Conduct](https://github.com/8fold/.github/blob/main/CODE_OF_CONDUCT.md)
+- [Contributing](https://github.com/8fold/.github/blob/main/CONTRIBUTING.md)
+- [Governance](https://github.com/8fold/.github/blob/main/GOVERNANCE.md)
+- [Versioning](https://github.com/8fold/.github/blob/main/docs/versioning-base.md)
+- [Security](https://github.com/8fold/.github/blob/main/SECURITY.md)

@@ -2,31 +2,50 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XMLBuilder;
+namespace Eightfold\XmlBuilder;
+
+use Eightfold\XmlBuilder\PropertyInterface;
 
 use Stringable;
 
-use Eightfold\XMLBuilder\Contracts\Contentable;
+use Eightfold\XmlBuilder\Properties;
 
-use Eightfold\XMLBuilder\Concatenate;
-
-use Eightfold\XMLBuilder\Callables\PropertyArrayToString;
-
-use Eightfold\XMLBuilder\Implementations\Properties as PropertiesImp;
-use Eightfold\XMLBuilder\Implementations\Contentable as ContentableImp;
-
-class Document implements Stringable, Contentable
+class Document implements PropertyInterface
 {
-    use PropertiesImp;
-    use ContentableImp;
-
     private string $version = '1.0';
 
     private string $encoding = 'UTF-8';
 
     private string $standalone = 'yes';
 
-    public function withVersion(string|float|int $version): self
+    public static function create(
+        string $name,
+        string|Stringable ...$content
+    ): static {
+        return new static($name, $content);
+    }
+
+    /**
+     * @param array<string|Stringable> $content
+     * @return static
+     */
+    public static function __callStatic(string $name, array $content = []): static
+    {
+        return new static($name, $content);
+    }
+
+    /**
+     * @param  array<string|Stringable>  $content
+     * @param  list<string>  $properties
+     */
+    final private function __construct(
+        private string $name,
+        private array $content = [],
+        private array $properties = []
+    ) {
+    }
+
+    public function withVersion(string|float|int $version): static
     {
         if (is_int($version)) {
             $version = strval($version) . '.0';
@@ -35,31 +54,43 @@ class Document implements Stringable, Contentable
         return $this;
     }
 
-    public function withEncoding(string $encoding): self
+    public function withEncoding(string $encoding): static
     {
         $this->encoding = $encoding;
         return $this;
     }
 
-    public function removeEncoding(): self
+    public function removeEncoding(): static
     {
         $this->encoding = '';
         return $this;
     }
 
-    public function withStandalone(bool $standalone): self
+    public function withStandalone(bool $standalone): static
     {
         $this->standalone = ($standalone) ? 'yes' : 'no';
         return $this;
     }
 
-    public function removeStandalone(): self
+    public function removeStandalone(): static
     {
         $this->standalone = '';
         return $this;
     }
 
-    public function __toString(): string
+    public function props(string ...$properties): static
+    {
+        $this->properties = array_values($properties);
+        return $this;
+    }
+
+    public function prop(string $prop): static
+    {
+        $this->properties[] = $prop;
+        return $this;
+    }
+
+    public function toString(): string
     {
         $declarationProps = [];
         $declarationProps[] = 'version ' . $this->version;
@@ -73,17 +104,22 @@ class Document implements Stringable, Contentable
         }
 
         $doctype =
-            '<?xml' . PropertyArrayToString::convert(...$declarationProps) . ' ?>'
+            '<?xml' . Properties::compile($declarationProps) . ' ?>'
             . "\n";
         return $doctype
-            . $this->opening()
-            . Concatenate::create(...$this->content)
-            . $this->closing();
+            . self::opening()
+            . implode('', array_map('strval', $this->content))
+            . self::closing();
+    }
+
+    public function __toString(): string
+    {
+        return $this->toString();
     }
 
     private function opening(): string
     {
-        return '<' . $this->name . $this->propertiesString() . '>';
+        return '<' . $this->name . Properties::compile($this->properties) . '>';
     }
 
     private function closing(): string
