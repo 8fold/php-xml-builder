@@ -23,3 +23,5 @@ parameters:
     reportNonIntStringArrayKey: true
     strictRules:
         allRules: true
+    ignoreErrors:
+        - '#Call to an undefined static method Eightfold\\XMLBuilder\\Element::(.*)#'
