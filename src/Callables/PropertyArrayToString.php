@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Eightfold\XmlBuilder_\Callables;
+namespace Eightfold\XmlBuilder\Callables;
 
 class PropertyArrayToString
 {

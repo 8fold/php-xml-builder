@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XmlBuilder_\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XmlBuilder_\Concatenate;
+use Eightfold\XmlBuilder\Concatenate;
 
-use Eightfold\XmlBuilder_\Element;
+use Eightfold\XmlBuilder\Element;
 
 class ConcatenateBaselineTest extends TestCase
 {

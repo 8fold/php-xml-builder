@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Eightfold\XmlBuilder_\Tests;
+namespace Eightfold\XmlBuilder\Tests;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-use Eightfold\XmlBuilder_\Document;
-use Eightfold\XmlBuilder_\Element;
-use Eightfold\XmlBuilder_\Cdata;
-use Eightfold\XmlBuilder_\Comment;
+use Eightfold\XmlBuilder\Document;
+use Eightfold\XmlBuilder\Element;
+use Eightfold\XmlBuilder\Cdata;
+use Eightfold\XmlBuilder\Comment;
 
 class PerformanceTest extends TestCase
 {
